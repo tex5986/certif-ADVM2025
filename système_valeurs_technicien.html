@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système de Valeurs - Technicien PNL ADVM 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #4a90e2;
+            margin-bottom: 20px;
+            border-left: 5px solid #4a90e2;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4facfe;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .concept-title {
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .protocole-container {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .protocole-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .etapes-list {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .etape {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            transition: all 0.3s ease;
+        }
+
+        .etape:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .etape-number {
+            background: #2196f3;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: rgba(240,248,255,0.5);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(79, 172, 254, 0.1);
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border: 2px solid #e17055;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .alert-box::before {
+            content: "⚠️";
+            font-size: 1.5em;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #fab1a0;
+            padding: 5px 10px;
+            border-radius: 50%;
+        }
+
+        .valeurs-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .valeur-tag {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .valeur-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .synthesis-box {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .key-point {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .certification-focus {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border: 3px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .schema-visual {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            flex: 1;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .flow-arrow::after {
+            content: "→";
+            font-size: 2em;
+            color: #667eea;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .concepts-grid, .intro-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .flow-arrow::after {
+                content: "↓";
+                transform: rotate(90deg);
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎯 SYSTÈME DE VALEURS</h1>
+            <div class="subtitle">Formation Technicien PNL ADVM 2025 - Document consolidé de révision</div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section">
+            <div class="section-title">📋 1. INTRODUCTION</div>
+            
+            <div class="intro-grid">
+                <div class="intro-box">
+                    <h3>🎯 Thématique globale</h3>
+                    <p>Formation complète sur l'identification, la hiérarchisation et l'intégration des valeurs personnelles en PNL. Approche technicien avec protocoles approfondis et outils pratiques.</p>
+                </div>
+                <div class="intro-box">
+                    <h3>📚 Sources intégrées</h3>
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li>• Ateliers pratiques Cyril (notes 1-106)</li>
+                        <li>• Protocole Chemin de Vie</li>
+                        <li>• Techniques d'exploration des valeurs</li>
+                        <li>• Intégration hypnotique des valeurs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="synthesis-box">
+                <h3>🎯 Objectif de certification</h3>
+                <p>Maîtriser l'accompagnement complet du processus de valeurs : détection, sélection, définition, intégration et transformation comportementale selon les standards ADVM niveau technicien.</p>
+            </div>
+        </div>
+
+        <!-- Concepts fondamentaux -->
+        <div class="section">
+            <div class="section-title">🧠 2. CONCEPTS & FONDAMENTAUX</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">📍 Définition des valeurs</div>
+                    <p>Les valeurs sont les fondations de notre identité, servant de boussole et de moteurs pour tracer notre route. Elles répondent à la question : "Qu'est-ce qui est important pour moi ?"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">🌳 Structure en arbre</div>
+                    <p><strong>Tronc :</strong> Valeurs fondamentales, profondes et stables<br>
+                    <strong>Branches :</strong> Valeurs contextuelles évoluant avec l'âge</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">⚖️ Hiérarchie des besoins</div>
+                    <p>1. Respirer - 2. Boire - 3. Dormir - 4. Manger - 5. Se reproduire - 6. Sécurité - 7. Reconnaissance/Lien</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">🎭 Deux dimensions</div>
+                    <p><strong>Faire/Avoir :</strong> Acquisition, succès matériel<br>
+                    <strong>Être/Donner :</strong> Expérience vécue, partage, identité</p>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h4>🚨 Enjeux du non-respect des valeurs</h4>
+                <p><strong>Effets négatifs :</strong> Frustration, démotivation, désengagement, dépendance, irresponsabilité</p>
+                <p><strong>Effets positifs :</strong> Plaisir, motivation, engagement, créativité, autonomie</p>
+            </div>
+        </div>
+
+        <!-- Types de valeurs -->
+        <div class="section">
+            <div class="section-title">🏷️ 3. TYPES DE VALEURS</div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Caractéristiques</th>
+                        <th>Exemples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Valeurs de finalité</strong></td>
+                        <td>Essentielles, indispensables à votre vie. Ce dont vous ne pouvez pas vous passer.</td>
+                        <td>Amour, Liberté, Authenticité, Spiritualité, Connexion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Valeurs de moyen</strong></td>
+                        <td>Stratégies pour nourrir les valeurs essentielles. Servent les valeurs de finalité.</td>
+                        <td>Efficacité, Cohérence, Challenge, Sport, Argent</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: #4a90e2; margin: 25px 0 15px 0;">Exemples de valeurs personnelles identifiées :</h3>
+            <div class="valeurs-examples">
+                <div class="valeur-tag">🎯 Alignement</div>
+                <div class="valeur-tag">😊 Bonheur</div>
+                <div class="valeur-tag">🤝 Respect</div>
+                <div class="valeur-tag">🔗 Partage</div>
+                <div class="valeur-tag">💬 Connexion</div>
+                <div class="valeur-tag">💪 Confiance</div>
+                <div class="valeur-tag">🌟 Grandeur</div>
+                <div class="valeur-tag">🤝 Loyauté</div>
+                <div class="valeur-tag">🎯 Engagement</div>
+                <div class="valeur-tag">🕊️ Liberté</div>
+                <div class="valeur-tag">😌 Sérénité</div>
+                <div class="valeur-tag">🙏 Gratitude</div>
+                <div class="valeur-tag">💝 Compassion</div>
+                <div class="valeur-tag">🔥 Passion</div>
+                <div class="valeur-tag">🧠 Curiosité</div>
+                <div class="valeur-tag">⚡ Énergie</div>
+            </div>
+        </div>
+
+        <!-- Protocoles d'identification -->
+        <div class="section">
+            <div class="section-title">🔍 4. PROTOCOLES D'IDENTIFICATION DES VALEURS</div>
+            
+            <div class="protocole-container">
+                <div class="protocole-title">📝 Phase 1 : Exploration dynamique (30 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Voyage rapide positif :</strong> Renforcement des ancrages positifs
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Métaphore clé USB :</strong> "Insérer la nouvelle version de soi"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Pétillement cellulaire :</strong> Ressentir l'intégration dans le corps
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Pont vers le futur :</strong> Ancrer le nouvel alignement
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Identification des comportements -->
+        <div class="section">
+            <div class="section-title">🎯 7. IDENTIFICATION DES COMPORTEMENTS</div>
+            
+            <div class="protocole-container">
+                <div class="protocole-title">🔍 Protocole d'identification des comportements saboteurs</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Se connecter à une valeur importante :</strong> Ressentir pleinement la valeur
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Identifier 3 comportements saboteurs :</strong> Contextes précis (où, quand, avec qui)
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Zéro culpabilité :</strong> Observer sans jugement
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Répéter pour 2-3 valeurs principales :</strong> Cartographier les écarts
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>Principe du "coup de marteau"</h4>
+                    <p>L'efficacité réside dans l'identification du point de levier pour une action ciblée. De petites actions peuvent avoir un grand impact par effet cumulé.</p>
+                </div>
+            </div>
+
+            <h3 style="color: #4a90e2; margin: 25px 0 15px 0;">Exemples de comportements saboteurs identifiés :</h3>
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Valeur : Grandeur</div>
+                    <p>• Se perdre dans les tâches administratives<br>
+                    • Parler trop vite en réunion<br>
+                    • Investir trop d'énergie pour peu de résultats</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Valeur : Communication</div>
+                    <p>• Se taire par peur du jugement<br>
+                    • Procrastiner les conversations difficiles<br>
+                    • Avancer seul sans partager</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cycles et évolution -->
+        <div class="section">
+            <div class="section-title">🔄 8. CYCLES D'ÉVOLUTION ET COACHING</div>
+            
+            <div class="schema-visual">
+                <h3 style="color: #2c5282; margin-bottom: 20px;">Modèle des saisons du développement</h3>
+                <div class="process-flow">
+                    <div class="flow-step">🍂 Automne<br><small>Perte de sens</small></div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">❄️ Hiver<br><small>Burn-out</small></div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">🌱 Printemps<br><small>Quête de sens</small></div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">☀️ Été<br><small>Croissance</small></div>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🎯 Processus de coaching des valeurs</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Accueillir le sentiment négatif :</strong> Validation sans jugement
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Détecter le besoin derrière :</strong> Quelle valeur n'est pas nourrie ?
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Rallumer les valeurs :</strong> Reconnexion pour motiver le changement
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Identifier les petits pas :</strong> Micro-changements à fort impact
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-focus">
+                <h3 style="text-align: center; margin-bottom: 15px;">🎯 Citations clés pour la certification</h3>
+                <p><strong>"La joie précède la victoire"</strong> - Yannick Noah</p>
+                <p><strong>"Accepter de l'inconfort pour grandir vers plus de confort"</strong></p>
+                <p><strong>"Les gens sont récompensés en public pour ce qu'ils ont pratiqué pendant des années en privé"</strong> - Tony Robbins</p>
+            </div>
+        </div>
+
+        <!-- Différences approches -->
+        <div class="section">
+            <div class="section-title">⚖️ 9. DIFFÉRENCES PRÉSENTIEL VS DISTANCIEL</div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Présentiel (Paul)</th>
+                        <th>Distanciel (Cyril)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Durée protocole</strong></td>
+                        <td>20 min max (certification)</td>
+                        <td>45-120 min (approfondissement)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Approche</strong></td>
+                        <td>Directe sur les valeurs</td>
+                        <td>Exploration systématique</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outils privilégiés</strong></td>
+                        <td>Chemin de vie court</td>
+                        <td>Intégration hypnotique complète</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profondeur</strong></td>
+                        <td>Comportementale/surface</td>
+                        <td>Identitaire/transformation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Public cible</strong></td>
+                        <td>Certification PNL</td>
+                        <td>Développement personnel</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Avantages Présentiel</div>
+                    <p>• Interaction directe et feedback immédiat<br>
+                    • Adaptation en temps réel<br>
+                    • Protocoles optimisés certification<br>
+                    • Dynamique de groupe</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Avantages Distanciel</div>
+                    <p>• Exploration approfondie sans contrainte<br>
+                    • Moins de pression sociale<br>
+                    • Possibilité d'enregistrement<br>
+                    • Travail sur l'origine des valeurs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Points de vigilance -->
+        <div class="section">
+            <div class="section-title">⚠️ 10. POINTS DE VIGILANCE</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Erreurs fréquentes</div>
+                    <p>• Confondre valeur et croyance<br>
+                    • Ne pas obtenir le "oui physiologique"<br>
+                    • Forcer l'association au négatif<br>
+                    • Négliger les micro-comportements</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Contre-indications Chemin de Vie</div>
+                    <p>• Diagnostic médical en attente<br>
+                    • Deuil récent ou programmé<br>
+                    • Divorce en cours<br>
+                    • Position de victimisation active</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Bonnes pratiques</div>
+                    <p>• Évaluer l'écologie avant protocole<br>
+                    • Respecter le rythme du client<br>
+                    • Adapter l'intensité selon sensibilité<br>
+                    • Valider les résistances</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Gestion énergétique</div>
+                    <p>• Prévoir ressourcement post-exercice<br>
+                    • Accueillir variations d'énergie<br>
+                    • Proposer sport/danse si baisse<br>
+                    • Normaliser les réactions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spécificités certification -->
+        <div class="section">
+            <div class="section-title">🎓 11. SPÉCIFICITÉS CERTIFICATION ADVM TECHNICIEN</div>
+            
+            <div class="certification-focus">
+                <h3>📋 Organisation des épreuves</h3>
+                <p><strong>Écrit (4h) :</strong> Analyse de cas, protocoles détaillés, questions théoriques</p>
+                <p><strong>Pratique (2×½ journées) :</strong> Démonstration complète du processus valeurs</p>
+                <p><strong>Critères :</strong> 12/20 minimum - Technique (40%) + Relationnel (30%) + Résultat (30%)</p>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🎯 Adaptations spécifiques niveau technicien</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Processus complet :</strong> Maîtriser les 5 phases (exploration → intégration)
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Chemin de vie adapté :</strong> Version 45 minutes avec intégration hypnotique
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Gestion des résistances :</strong> Protocoles alternatifs si blocages
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Suivi comportemental :</strong> Accompagnement post-protocole
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <div class="key-point">🎯 Maîtriser le passage dissocié/associé</div>
+                <div class="key-point">🎯 Savoir adapter les échéances temporelles</div>
+                <div class="key-point">🎯 Gérer les projections difficiles</div>
+                <div class="key-point">🎯 Utiliser les métaphores d'intégration</div>
+                <div class="key-point">🎯 Valider l'écologie des interventions</div>
+                <div class="key-point">🎯 Accompagner les variations énergétiques</div>
+            </div>
+        </div>
+
+        <!-- Synthèse visuelle -->
+        <div class="section">
+            <div class="section-title">🎯 12. SYNTHÈSE VISUELLE</div>
+            
+            <div class="schema-visual">
+                <h3 style="color: #2c5282; margin-bottom: 20px;">Processus complet d'accompagnement des valeurs</h3>
+                <div class="process-flow" style="flex-direction: column; gap: 15px;">
+                    <div class="flow-step">🔍 EXPLORATION → 30-50 valeurs brutes</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">🎯 SÉLECTION → 15 valeurs importantes</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">⚖️ HIÉRARCHISATION → 5-7 valeurs essentielles</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">📝 DÉFINITION → Formulations personnelles</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">🌟 INTÉGRATION → Ancrage hypnotique</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">🛤️ CHEMIN DE VIE → Projection temporelle</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">🎯 COMPORTEMENTS → Identification écarts</div>
+                    <div style="font-size: 2em; color: #667eea;">↓</div>
+                    <div class="flow-step">✨ TRANSFORMATION → Changement durable</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10 points clés -->
+        <div class="section">
+            <div class="section-title">🏆 13. DIX POINTS CLÉS À RETENIR</div>
+            
+            <div class="key-points">
+                <div class="key-point">1️⃣ Les valeurs sont les fondations de l'identité et servent de boussole</div>
+                <div class="key-point">2️⃣ Distinguer valeurs de finalité (essentielles) vs valeurs de moyen</div>
+                <div class="key-point">3️⃣ Processus en 5 phases : exploration → sélection → hiérarchisation → définition → intégration</div>
+                <div class="key-point">4️⃣ Chemin de vie : contraste positif/négatif pour ancrer la transformation</div>
+                <div class="key-point">5️⃣ Alternance dissociation/association cruciale pour l'intégration</div>
+                <div class="key-point">6️⃣ Identifier comportements saboteurs sans culpabilité</div>
+                <div class="key-point">7️⃣ Respecter contre-indications : deuil, diagnostic médical, victimisation</div>
+                <div class="key-point">8️⃣ Adaptation présentiel/distanciel selon objectifs</div>
+                <div class="key-point">9️⃣ Gestion écologique des résistances et variations énergétiques</div>
+                <div class="key-point">🔟 Effet cumulé : petits changements → grandes transformations</div>
+            </div>
+        </div>
+
+        <!-- Autres infos -->
+        <div class="section">
+            <div class="section-title">📋 14. AUTRES INFORMATIONS ESSENTIELLES</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Langage hypnotique</div>
+                    <p>Utiliser un langage vague pour permettre au client d'y mettre ses propres significations. Passage du "tu" au "je" pour renforcer la connexion.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Adaptations visio</div>
+                    <p>Faire dessiner le chemin de vie sur feuille. Éviter protocole au sol. Privilégier clarté visuelle et éviter déplacements non maîtrisés.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Gestion du temps</div>
+                    <p>Premier passage : poser les bases. Deuxième passage : approfondir contraste. Troisième passage : autonomie du client.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Métaphores d'intégration</div>
+                    <p>Clé USB, pont vers le futur, bouton de mise à jour, vague océanique. Adapter selon sensibilité du client.</p>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h4>🎓 Différence coaching/thérapie</h4>
+                <p><strong>Coaching :</strong> Contrat défini, objectif précis, nombre de séances limité<br>
+                <strong>Thérapie :</strong> Processus ouvert, exploration plus profonde</p>
+            </div>
+
+            <div class="synthesis-box">
+                <h3 style="margin-bottom: 15px;">📚 Pour aller plus loin</h3>
+                <p>Formation coach professionnel : 10 mois + intégration fédération<br>
+                Recadrage en 6 points pour changement comportemental<br>
+                Tri de 60 mots valeurs pour approche alternative</p>
+            </div>
+        </div>
+
+        <!-- FAQ et questions d'ateliers -->
+        <div class="section">
+            <div class="section-title">❓ 15. FAQ & QUESTIONS D'ATELIERS</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Q: Comment gérer la résistance au changement ?</div>
+                    <p><strong>R:</strong> Accueillir avec compassion, ne pas forcer. "Le jour où tu veux te libérer, je peux t'aider." Respecter le rythme et valider les résistances.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Q: Que faire si la personne ne visualise pas ?</div>
+                    <p><strong>R:</strong> Utiliser métaphores, exercices guidés, ou approche kinesthésique. Adapter selon les canaux sensoriels privilégiés.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Q: Comment différencier valeur et croyance ?</div>
+                    <p><strong>R:</strong> Valeur = "J'ai envie d'être généreux" (souple). Croyance = "Il faut être généreux" (rigide, obligation).</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Q: Peut-on perdre ses compétences en changeant ses valeurs ?</div>
+                    <p><strong>R:</strong> Non, les compétences restent disponibles et peuvent être mobilisées par les nouvelles valeurs alignées.</p>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🎭 Démonstrations pratiques typiques</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Cas "Authenticité bloquée" :</strong> Travail sur mécanismes de protection, réhabilitation relationnelle progressive
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Cas "Perfectionnisme paralysant" :</strong> Dissociation performance/identité, acceptation de l'erreur comme apprentissage
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Cas "Peur de l'engagement" :</strong> Exploration des bénéfices cachés, redéfinition de la liberté
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Protocoles complémentaires -->
+        <div class="section">
+            <div class="section-title">🔧 16. PROTOCOLES COMPLÉMENTAIRES</div>
+            
+            <div class="protocole-container">
+                <div class="protocole-title">🎯 Recadrage en 6 points pour changement comportemental</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Identifier le comportement :</strong> Comportement automatique indésirable
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Contacter la partie responsable :</strong> "Y a-t-il une partie de toi qui génère ce comportement ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Identifier l'intention positive :</strong> "Que veut cette partie pour toi ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Générer alternatives :</strong> 3 nouveaux comportements plus écologiques
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">5</span>
+                        <strong>Vérifier l'écologie :</strong> "Toutes les parties sont-elles d'accord ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">6</span>
+                        <strong>Intégrer dans le futur :</strong> Projection et ancrage des nouveaux comportements
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">⭐ Objectif en 5 points (préparation Chemin de Vie)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Clarifier l'objectif :</strong> Formulation positive, précise, mesurable
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Vérifier l'écologie :</strong> Conséquences dans tous les domaines de vie
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Identifier les ressources :</strong> Compétences, expériences, soutiens disponibles
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Définir les étapes :</strong> Jalons concrets et timeline réaliste
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">5</span>
+                        <strong>Premier pas :</strong> Action concrète immédiate
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Annexes -->
+        <div class="section">
+            <div class="section-title">📎 17. ANNEXES</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Phrases types d'exploration</div>
+                    <p>• "Qu'est-ce que tu kiffes dans la vie ?"<br>
+                    • "Qu'est-ce qui te met en énergie ?"<br>
+                    • "À quoi tu passes ton temps libre ?"<br>
+                    • "Un très bon souvenir de ta vie ?"<br>
+                    • "Que fais-tu de ton argent ?"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Questions d'approfondissement</div>
+                    <p>• "Qu'est-ce que ça te permet de nourrir de plus important ?"<br>
+                    • "En quoi c'est important pour toi ?"<br>
+                    • "À quoi ça sert dans ta vie ?"<br>
+                    • "Qu'est-ce que cette valeur nourrit de plus grand ?"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Phrases de validation</div>
+                    <p>• "C'est ça !"<br>
+                    • "Quand tu dis que... ?"<br>
+                    • "Tu peux me reformuler ça ?"<br>
+                    • "J'entends que... c'est juste ?"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Formulations d'intégration</div>
+                    <p>• "Pour moi, [valeur], c'est quand je..."<br>
+                    • "Je sais que je nourris ma valeur [X] quand..."<br>
+                    • "Cette valeur est pleinement vécue lorsque..."</p>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h4>🎯 Matériel nécessaire pour les ateliers</h4>
+                <p>• Feuilles A4 pour dessiner le chemin de vie<br>
+                • Chronomètre pour respecter les timings<br>
+                • Liste de 60 mots valeurs (méthode alternative)<br>
+                • Support audio pour intégration autonome</p>
+            </div>
+        </div>
+
+        <!-- Différences par niveau -->
+        <div class="section">
+            <div class="section-title">📊 18. ADAPTATIONS PAR NIVEAU PNL</div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Base</th>
+                        <th>Technicien</th>
+                        <th>Praticien</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Protocoles</strong></td>
+                        <td>Identification simple des valeurs</td>
+                        <td>Processus complet + Chemin de vie</td>
+                        <td>Intégration thérapeutique avancée</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Durée</strong></td>
+                        <td>30-45 minutes</td>
+                        <td>90-120 minutes</td>
+                        <td>2-3 heures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profondeur</strong></td>
+                        <td>Conscience des valeurs</td>
+                        <td>Transformation comportementale</td>
+                        <td>Intégration identitaire</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outils</strong></td>
+                        <td>Questions d'exploration</td>
+                        <td>Chemin de vie + Intégration</td>
+                        <td>Tous protocoles + Supervision</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Stratégies de révision -->
+        <div class="section">
+            <div class="section-title">📚 19. STRATÉGIES DE RÉVISION</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Profil Global</div>
+                    <p>• Vue d'ensemble d'abord<br>
+                    • Schémas et mindmaps<br>
+                    • Liens entre protocoles<br>
+                    • Compréhension des enjeux généraux</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Profil Spécifique</div>
+                    <p>• Détail de chaque étape<br>
+                    • Exemples concrets multiples<br>
+                    • Répétition séquentielle<br>
+                    • Maîtrise technique précise</p>
+                </div>
+            </div>
+
+            <div class="certification-focus">
+                <h3 style="text-align: center; margin-bottom: 15px;">🧠 Gestion du stress d'examen avec PNL</h3>
+                <p><strong>Auto-ancrage ressource :</strong> Installer un état de confiance avant l'épreuve</p>
+                <p><strong>Préparation mentale :</strong> Visualiser le déroulé réussi de l'examen</p>
+                <p><strong>Recadrage positif :</strong> "C'est l'occasion de montrer mes compétences"</p>
+                <p><strong>Croyances aidantes :</strong> "J'ai les compétences" / "Chaque erreur est un apprentissage"</p>
+            </div>
+        </div>
+
+        <!-- Questions types certification -->
+        <div class="section">
+            <div class="section-title">📝 20. QUESTIONS TYPES CERTIFICATION</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Questions théoriques</div>
+                    <p>• "Expliquez le processus d'identification des valeurs en 5 phases"<br>
+                    • "Différenciez valeurs de finalité et valeurs de moyen avec exemples"<br>
+                    • "Décrivez les contre-indications du chemin de vie"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Cas pratiques</div>
+                    <p>• "Accompagnez cette personne bloquée dans la visualisation"<br>
+                    • "Gérez cette résistance au changement de comportement"<br>
+                    • "Adaptez le chemin de vie pour une projection à 10 ans"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Démonstrations pratiques</div>
+                    <p>• Processus complet d'identification (30 min)<br>
+                    • Chemin de vie avec intégration (45 min)<br>
+                    • Gestion d'une situation difficile (20 min)</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Critères d'évaluation</div>
+                    <p>• Respect des protocoles et adaptations<br>
+                    • Qualité relationnelle et calibrage<br>
+                    • Gestion des résistances<br>
+                    • Résultat observé et intégration</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bibliographie et ressources -->
+        <div class="section">
+            <div class="section-title">📖 21. RESSOURCES COMPLÉMENTAIRES</div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-title">Lectures approfondies</div>
+                    <p>• Tony Robbins : "Pouvoir illimité"<br>
+                    • Robert Dilts : "Changer les systèmes de croyances"<br>
+                    • Shelle Rose Charvet : "Mots qui motivent"<br>
+                    • Schwartz : "Thérapie des systèmes familiaux"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Outils pratiques</div>
+                    <p>• Cartes de valeurs pour tri rapide<br>
+                    • Questionnaires d'auto-évaluation<br>
+                    • Supports audio d'intégration<br>
+                    • Grilles d'observation comportementale</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Formations complémentaires</div>
+                    <p>• Coach professionnel certifié (10 mois)<br>
+                    • Spécialisation thérapie systémique<br>
+                    • Formation en hypnose ericksonienne<br>
+                    • Supervision de pratique</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">Applications numériques</div>
+                    <p>• Apps de suivi des valeurs<br>
+                    • Journaux de gratitude digitaux<br>
+                    • Rappels comportementaux<br>
+                    • Communautés de pratique en ligne</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="section">
+            <div class="section-title">✨ 22. CONCLUSION</div>
+            
+            <div class="synthesis-box">
+                <h3>🎯 Maîtrise du système de valeurs niveau Technicien</h3>
+                <p>Ce document consolidé vous donne tous les outils pour accompagner efficacement le processus complet de transformation par les valeurs. La maîtrise de ces protocoles permet d'accompagner des changements durables et alignés avec l'identité profonde de la personne.</p>
+                
+                <div style="margin: 25px 0; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 10px;">
+                    <h4 style="color: #2c5282; margin-bottom: 10px;">Rappel du processus complet :</h4>
+                    <p><strong>1. EXPLORATION</strong> → Générer 30-50 valeurs brutes par questionnement dynamique</p>
+                    <p><strong>2. SÉLECTION</strong> → Réduire à 15 valeurs en distinguant finalité/moyen</p>
+                    <p><strong>3. HIÉRARCHISATION</strong> → Classer 5-7 valeurs par comparaison pairée</p>
+                    <p><strong>4. DÉFINITION</strong> → Formuler personnellement chaque valeur</p>
+                    <p><strong>5. INTÉGRATION</strong> → Ancrer par processus hypnotique multi-sensoriel</p>
+                    <p><strong>6. CHEMIN DE VIE</strong> → Projeter les conséquences à long terme</p>
+                    <p><strong>7. COMPORTEMENTS</strong> → Identifier les écarts et transformer</p>
+                </div>
+                
+                <p style="font-weight: bold; color: #4a90e2;">La transformation authentique commence par la reconnexion à ses valeurs profondes. Ces protocoles offrent une voie royale vers l'alignement et l'épanouissement.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="section" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h3>📄 Document consolidé Technicien PNL ADVM 2025</h3>
+            <p><strong>Système de Valeurs - Formation complète niveau Technicien</strong></p>
+            <p>Sources exhaustives : Ateliers pratiques Cyril (notes 1-106) + Protocoles Paul + Documents complémentaires</p>
+            <p style="margin-top: 20px; font-style: italic; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
+                <strong>Instructions d'impression PDF :</strong><br>
+                Ctrl+P (ou Cmd+P sur Mac) → Destination : PDF<br>
+                Format A4 Portrait → Marges standard → Échelle 100%<br>
+                Cocher 'Arrière-plans graphiques' et 'En-têtes et pieds de page'
+            </p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                Document prêt pour révision certification • Tous contenus intégrés sans doublons • Spécificités techniques niveau Technicien
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+                    <h4 style="margin-bottom: 15px; color: #2c5282;">🎯 Méthode 1 : Boucle hypnotique</h4>
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Marche en 8 :</strong> Effet hypnotique, stimulation du système nerveux et créativité
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Questions dynamiques :</strong> "Qu'est-ce que tu aimes/kiffes ?" en boucle
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Approfondissement :</strong> "Qu'est-ce que ça te permet de nourrir de plus important ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Balayage domaines :</strong> Sport, famille, travail, loisirs, relations
+                    </div>
+                </div>
+
+                <div class="etapes-list">
+                    <h4 style="margin-bottom: 15px; color: #2c5282;">🎯 Méthode 2 : Questions révélatrices</h4>
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Temps/Argent :</strong> "Que faites-vous de votre temps/argent ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Énergie :</strong> "Qu'est-ce qui vous met en énergie ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Environnement :</strong> "Comment meublez-vous votre environnement ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Souvenirs :</strong> "Un très bon souvenir de votre vie ?"</div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>🎯 Objectif Phase 1</h4>
+                    <p>Générer 30 à 50 valeurs brutes en restant dynamique. Désactiver le mental et ses jugements ("c'est bien/mal, il faut...").</p>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🎯 Phase 2 : Regroupement et sélection (15 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Regroupement :</strong> Rassembler les mots par familles sémantiques
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Distinction :</strong> Identifier valeurs de finalité vs valeurs de moyen
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Questions clés :</strong> "À quoi sert cette valeur ?" / "Qu'est-ce qu'elle nourrit de plus grand ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Sélection :</strong> Réduire à 15 valeurs importantes maximum
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">⚖️ Phase 3 : Hiérarchisation (20 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Comparaison par paires :</strong> "Préférez-vous une vie avec plus de X ou Y ?"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Écoute corporelle :</strong> Ressentis physiques et intuition
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Validation :</strong> "Oui physiologique" pour confirmer
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Finalisation :</strong> Obtenir 5 à 7 valeurs hiérarchisées
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Définition et intégration -->
+        <div class="section">
+            <div class="section-title">💎 5. DÉFINITION ET INTÉGRATION DES VALEURS</div>
+            
+            <div class="protocole-container">
+                <div class="protocole-title">📝 Phase 4 : Définition personnelle (40 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Formulation :</strong> "Pour moi, [valeur], c'est quand je..."
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Accordage :</strong> Ajuster jusqu'à parfaite justesse
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Simplicité :</strong> Compréhensible par un enfant de 7 ans
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Validation :</strong> Connexion émotionnelle authentique
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🌟 Phase 5 : Intégration hypnotique (20 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Évocation multi-sensorielle :</strong> Souvenir, couleur, définition, symbole
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Double mouvement :</strong> Flash interne puis expansion externe
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Empilement :</strong> Intégrer les 5 valeurs successivement
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Credo et métaphore :</strong> Phrase turbo et image unificatrice
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>🎨 Exemple d'association</h4>
+                    <p><strong>Bonheur :</strong> Bleu, thorax, connexion au vivant<br>
+                    <strong>Respect :</strong> Jaune, bas-ventre, alignement avec le juste<br>
+                    <strong>Partage :</strong> Blanc, main droite, qualité des échanges</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Protocole Chemin de Vie -->
+        <div class="section">
+            <div class="section-title">🛤️ 6. PROTOCOLE CHEMIN DE VIE</div>
+            
+            <div class="schema-visual">
+                <h3 style="color: #2c5282; margin-bottom: 20px;">Schéma du processus</h3>
+                <div class="process-flow">
+                    <div class="flow-step">🌱 Reconnexion valeurs</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">✨ Chemin positif</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">⚠️ Chemin négatif</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-step">🔄 Intégration</div>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🌟 Étape 1 : Chemin positif (20 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Reconnexion valeurs :</strong> "Rallumer tous les réverbères"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Projection temporelle :</strong> 1 mois → 3 mois → 6 mois → 1 an → 2 ans
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Dissociation puis association :</strong> Observer puis ressentir chaque scène
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Ancrage positif :</strong> "Sauter dedans" pour créer l'expérience
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">⚠️ Étape 2 : Contraste négatif (15 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Chemin rouge :</strong> Visualiser la vie de "laisser-aller"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Conséquences :</strong> Observer stagnation, culpabilité, perte d'énergie
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Prise de conscience :</strong> Coût émotionnel, relationnel, énergétique
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Retour immédiat :</strong> "Souffler et revenir au chemin positif"
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>🚨 Points de vigilance</h4>
+                    <p>• Ne pas forcer l'association au négatif<br>
+                    • Respecter les refus de visualisation<br>
+                    • Éviter avec : diagnostic médical en attente, deuil, divorce</p>
+                </div>
+            </div>
+
+            <div class="protocole-container">
+                <div class="protocole-title">🔄 Étape 3 : Intégration (10 minutes)</div>
+                
+                <div class="etapes-list">
+                    <div class="etape">
+                        <span class="etape-number">1</span>
+                        <strong>Voyage rapide positif :</strong> Renforcement des ancrages positifs
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">2</span>
+                        <strong>Métaphore clé USB :</strong> "Insérer la nouvelle version de soi"
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">3</span>
+                        <strong>Pétillement cellulaire :</strong> Ressentir l'intégration dans le corps
+                    </div>
+                    <div class="etape">
+                        <span class="etape-number">4</span>
+                        <strong>Pont vers le futur :</strong> Ancrer le nouvel alignement
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>🎯 Métaphores d'intégration alternatives</h4>
+                    <p><strong>Escalier intérieur :</strong> Monter vers une nouvelle version de soi<br>
+                    <strong>Bouton de mise à jour :</strong> Activer le changement à 100%<br>
+                    <strong>Vague océanique :</strong> Mouvement permanent d'intégration des valeurs</p>
+                </div>

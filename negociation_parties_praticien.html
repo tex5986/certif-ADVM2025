@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Négociation des parties - Praticien ADVM 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><rect width="11" height="11" x="10" y="10" fill="url(%23a)"/><rect width="11" height="11" x="20" y="10" fill="url(%23a)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .nav-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .section-concepts { border-left-color: #4facfe; }
+        .section-protocole { border-left-color: #43e97b; }
+        .section-differences { border-left-color: #fa709a; }
+        .section-vigilance { border-left-color: #ffcd3c; }
+        .section-ateliers { border-left-color: #a8edea; }
+        .section-faq { border-left-color: #d299c2; }
+        .section-certification { border-left-color: #667eea; }
+        
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .protocol-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .step-number {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f093fb;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .mode-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .mode-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .mode-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .faq-item {
+            background: rgba(74, 85, 104, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background: rgba(74, 85, 104, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-points {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(250, 112, 154, 0.3);
+        }
+        
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .point-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            font-weight: 500;
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: #2d3748;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .comparison-card {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                background: white;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🤝 Négociation des parties</h1>
+            <p class="subtitle">Guide de Révision - Certification Praticien ADVM 2025</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Paul Pyronnet Institut | Version Présentiel & Distanciel
+            </div>
+        </header>
+
+        <nav class="nav-grid">
+            <a href="#concepts" class="nav-item">🎯 Concepts Clés</a>
+            <a href="#protocole" class="nav-item">⚙️ Protocole Détaillé</a>
+            <a href="#differences" class="nav-item">📊 Présentiel vs Distanciel</a>
+            <a href="#vigilance" class="nav-item">⚠️ Points de Vigilance</a>
+            <a href="#ateliers" class="nav-item">🎪 Ateliers & Questions</a>
+            <a href="#certification" class="nav-item">🎓 Spécificités Certification</a>
+            <a href="#synthese" class="nav-item">📊 Synthèse Visuelle</a>
+        </nav>
+
+        <div class="content">
+            <section id="introduction" class="section">
+                <h2>📋 Introduction</h2>
+                <p><strong>Thématique globale :</strong> Résolution des conflits internes par médiation et coopération entre parties de soi</p>
+                <p><strong>Sources intégrées :</strong></p>
+                <ul>
+                    <li>Fiches techniques Paul Pyronnet Institut (Présentiel)</li>
+                    <li>Ateliers pratiques Cyril Godon (Distanciel)</li>
+                    <li>Démonstrations et retours d'expérience des stagiaires</li>
+                    <li>Documentation démarche cohésion appliquée</li>
+                </ul>
+                <p><strong>Objectif :</strong> Créer un support unique de révision pour la certification praticien ADVM</p>
+                
+                <div class="key-points">
+                    <h3>🌟 10 Points Clés à Retenir</h3>
+                    <div class="points-grid">
+                        <div class="point-card">🤝 Médiation interne entre parties opposées</div>
+                        <div class="point-card">🎯 Intention positive derrière chaque comportement</div>
+                        <div class="point-card">👐 Dissociation physique (main gauche/droite)</div>
+                        <div class="point-card">🔄 Passage du conflit à la coopération</div>
+                        <div class="point-card">💎 Reconnaissance mutuelle des ressources</div>
+                        <div class="point-card">🎨 Symbolisation des parties internes</div>
+                        <div class="point-card">🏔️ Recherche de valeurs communes élevées</div>
+                        <div class="point-card">🤲 Intégration finale sur la poitrine</div>
+                        <div class="point-card">✅ Vérification écologique obligatoire</div>
+                        <div class="point-card">🌉 Pont vers futur systématique</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="concepts" class="section section-concepts">
+                <h2>🎯 Concepts & Fondamentaux</h2>
+                
+                <h3>Définitions Clés</h3>
+                <div class="highlight-box">
+                    <strong>🤝 Négociation des parties :</strong> Technique de changement profond qui résout les tiraillements internes en faisant coopérer deux parties de soi opposées. Processus de médiation interne pour transformer la division en collaboration.
+                </div>
+                
+                <div class="example-box">
+                    <strong>🎭 Principe :</strong> Au lieu de choisir entre A ou B, on fait dialoguer la partie qui veut A avec celle qui veut B pour trouver une solution qui nourrit les deux.
+                </div>
+
+                <h3>Présupposés Fondamentaux PNL</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0;">
+                    <span class="badge">Intention positive</span>
+                    <span class="badge">Comportement ≠ Identité</span>
+                    <span class="badge">Parties de soi</span>
+                    <span class="badge">Coopération intelligente</span>
+                    <span class="badge">Ressources internes</span>
+                    <span class="badge">Médiation interne</span>
+                    <span class="badge">Dissociation créative</span>
+                    <span class="badge">Écologie systémique</span>
+                </div>
+
+                <h3>Indications d'Usage</h3>
+                <div class="warning-box">
+                    <p><strong>Usage spécifique :</strong> Conflits internes avec tiraillements réels entre deux directions opposées</p>
+                    <ul>
+                        <li>J'ai envie d'aller à cette soirée ET j'ai envie de rester à la maison</li>
+                        <li>Une partie veut travailler, l'autre veut se reposer</li>
+                        <li>Conflit entre sécurité et liberté</li>
+                        <li>Tiraillement vie professionnelle / vie familiale</li>
+                        <li>Hésitation entre deux projets incompatibles</li>
+                    </ul>
+                </div>
+
+                <h3>Différence avec Recadrage 6 Points</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3>📝 Recadrage 6 Points</h3>
+                        <ul style="text-align: left;">
+                            <li>1 seule partie bloque l'objectif</li>
+                            <li>Objectif clair déjà défini</li>
+                            <li>Cherche alternatives comportement</li>
+                            <li>Intention positive → Solutions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <h3>🤝 Négociation Parties</h3>
+                        <ul style="text-align: left;">
+                            <li>2 parties opposées en conflit</li>
+                            <li>Tiraillement sans objectif clair</li>
+                            <li>Cherche coopération entre parties</li>
+                            <li>Médiation → Projet commun</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="protocole" class="section section-protocole">
+                <h2>⚙️ Protocole Détaillé en 8 Étapes</h2>
+                
+                <div class="protocol-step">
+                    <div class="step-number">1</div>
+                    <strong>Identifier les parties en conflit :</strong>
+                    <br>"Qu'est-ce qui te tiraille ? Décris-moi ces deux directions..."
+                    <br>→ Bien marquer qu'il y a tiraillement réel entre 2 directions différentes
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">2</div>
+                    <strong>Reconnaître et dissocier les parties :</strong>
+                    <br>• "Pose une partie dans ta main droite, l'autre dans ta main gauche"
+                    <br>• "Quelle représentation symbolique vois-tu pour chacune ?"
+                    <br>• Métaphores spontanées (montagne, cœur, animal...)
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">3</div>
+                    <strong>Identifier les intentions positives :</strong>
+                    <br>• "Qu'est-ce qui est important pour cette partie ?"
+                    <br>• "Que veut-elle nourrir comme valeur ?"
+                    <br>• Monter en niveaux : comportement → valeur → finalité
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">4</div>
+                    <strong>Identifier l'intention commune :</strong>
+                    <br>"Au niveau supérieur, que visent-elles toutes les deux ?"
+                    <br>→ Trouver la "vérité plus élevée" qui les unit
+                    <br>→ Projet commun, vision partagée
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">5</div>
+                    <strong>Faire prendre conscience des ressources croisées :</strong>
+                    <br>"En quoi cette partie devient une garantie pour l'autre ?"
+                    <br>→ Transformer opposition en complémentarité
+                    <br>→ Reconnaissance mutuelle des compétences
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">6</div>
+                    <strong>Négocier un accord écologique :</strong>
+                    <br>"Comment peuvent-elles collaborer pour le projet commun ?"
+                    <br>→ Solution satisfaisante pour les deux parties
+                    <br>→ Vérifier objections d'autres parties internes
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">7</div>
+                    <strong>Intégrer les parties :</strong>
+                    <br>"Rapproche lentement tes mains vers ta poitrine..."
+                    <br>→ Mouvement idéomoteur symbolisant unification
+                    <br>→ Sceller l'accord par geste corporel
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">8</div>
+                    <strong>Pont vers le futur :</strong>
+                    <br>"Imagine prochaine situation similaire avec cette nouvelle coopération..."
+                    <br>→ Ancrer le changement dans situations futures
+                </div>
+
+                <h3>🎯 Moment Clé : L'Étape de la "Garantie"</h3>
+                <div class="highlight-box">
+                    <p><strong>Point de bascule du protocole :</strong> Quand chaque partie comprend que l'autre devient une ressource (et non plus un obstacle) pour atteindre leur vision commune.</p>
+                    <p><strong>Question magique :</strong> "En quoi cette partie devient-elle une garantie pour l'autre ?"</p>
+                    <p><strong>Effet :</strong> Permet de "lâcher l'intellectuel" et d'accéder à l'intelligence coopérative</p>
+                </div>
+            </section>
+
+            <section id="differences" class="section section-differences">
+                <h2>📊 Spécificités Présentiel vs Distanciel</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3>🏢 Présentiel (Paul)</h3>
+                        <ul style="text-align: left;">
+                            <li>Calibrage non-verbal direct</li>
+                            <li>Gestes physiques d'ancrage</li>
+                            <li>Observation micro-expressions</li>
+                            <li>Présence physique rassurante</li>
+                            <li>Gestion émotions intense</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <h3>💻 Distanciel (Cyril)</h3>
+                        <ul style="text-align: left;">
+                            <li>Attention calibrage auditif renforcé</li>
+                            <li>Instructions très précises</li>
+                            <li>Vérifications régulières état</li>
+                            <li>Guidance verbale détaillée</li>
+                            <li>Sécurité par la parole</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🎧 Adaptations Distanciel Spécifiques</h3>
+                <div class="highlight-box">
+                    <p><strong>Consignes Cyril :</strong> "Casque, debout dans salon, imagine-moi à ta droite"</p>
+                    <p><strong>Calibrage auditif :</strong> Respiration, tonalité, silences, rythme verbal</p>
+                    <p><strong>Vérifications :</strong> "Comment te sens-tu maintenant ?" régulièrement</p>
+                    <p><strong>Instructions précises :</strong> Détailler chaque geste, chaque position</p>
+                </div>
+            </section>
+
+            <section id="vigilance" class="section section-vigilance">
+                <h2>⚠️ Points de Vigilance</h2>
+                
+                <h3>🚫 Erreurs Fréquentes</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Faux tiraillement :</strong> Une contrainte vs un désir (au lieu de 2 désirs opposés)</li>
+                        <li><strong>Partir dans l'explication :</strong> Rester dans l'analyse au lieu de l'expérience sensorielle</li>
+                        <li><strong>Formulation négative :</strong> "Qu'est-ce qui te freine ?" → induit jugement</li>
+                        <li><strong>Oublier vérification écologique :</strong> Autres parties internes non consultées</li>
+                        <li><strong>Manquer étape garantie :</strong> Ne pas faire reconnaître complémentarité</li>
+                        <li><strong>Apprentissage "robot" :</strong> Réciter sans adapter à la personne</li>
+                    </ul>
+                </div>
+
+                <h3>✅ Bonnes Formulations</h3>
+                <div class="example-box">
+                    <p><strong>Au lieu de :</strong> "Qu'est-ce qui te freine ?" → <strong>Plutôt :</strong> "Qu'est-ce qui est important pour cette partie ?"</p>
+                    <p><strong>Au lieu de :</strong> "Cette partie est négative" → <strong>Plutôt :</strong> "Que protège cette partie ?"</p>
+                    <p><strong>Au lieu de :</strong> "Il faut choisir" → <strong>Plutôt :</strong> "Comment peuvent-elles coopérer ?"</p>
+                </div>
+
+                <h3>🔍 Signaux d'Alerte</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li>Personne reste dans l'analyse intellectuelle</li>
+                        <li>Jugement d'une partie contre l'autre</li>
+                        <li>Difficulté à trouver intentions positives</li>
+                        <li>Résistance à la symbolisation</li>
+                        <li>Blocage émotionnel sans parole</li>
+                        <li>Parties qui "refusent de négocier"</li>
+                    </ul>
+                </div>
+
+                <h3>🛠️ Solutions Aux Blocages</h3>
+                <div class="highlight-box">
+                    <p><strong>Si jugement persistant :</strong> "Acceptes-tu que cette partie ait le droit d'exister ?"</p>
+                    <p><strong>Si analyse excessive :</strong> "Quelle est l'image ressentie ?" (ramener au sensoriel)</p>
+                    <p><strong>Si résistance :</strong> "Cette partie accepte-t-elle de discuter pour comprendre ?"</p>
+                    <p><strong>Si 3e partie apparaît :</strong> L'accueillir et l'intégrer au processus</p>
+                </div>
+            </section>
+
+            <section id="ateliers" class="section section-ateliers">
+                <h2>🎪 Ateliers & Questions (Distanciel - Cyril)</h2>
+                
+                <h3>💡 Questions Fréquentes des Ateliers</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: Différence avec recadrage en 6 points ?</div>
+                    <p>Recadrage = 1 partie bloque objectif clair. Négociation = 2 parties opposées sans objectif défini, besoin médiation interne.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Que faire si une partie "refuse de négocier" ?</div>
+                    <p>Demander si elle accepte au moins de discuter pour comprendre son intention positive. Respecter son rythme, ne pas forcer.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Comment gérer l'apparition d'une 3e partie (ex: jugeante) ?</div>
+                    <p>L'accueillir pleinement ! Souvent clé de déblocage. Écouter son intention positive et l'intégrer au processus.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Peut-on appliquer en groupe/couple/équipe ?</div>
+                    <p>Oui ! Démarche "Cohésion" de Paul. Même principe étendu aux systèmes humains collectifs.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Comment gérer si intentions positives au 3e niveau ne sont pas exactement identiques ?</div>
+                    <p>Chercher ponts entre valeurs proches. Monter encore en niveau pour trouver aspiration commune plus élevée.</p>
+                </div>
+
+                <h3>🎯 Retours d'Expérience Stagiaires</h3>
+                
+                <div class="example-box">
+                    <strong>Cas Agathe (Agence immobilière vs Créativité bijoux) :</strong>
+                    <br>Main droite = créativité, envie fabrication, minutie
+                    <br>Main gauche = raison, sécurité financière, aide au mari
+                    <br>Solution : libérer demi-journée week-end pour créativité, optimiser organisation
+                </div>
+
+                <div class="example-box">
+                    <strong>Cas Audrey (Enfant seule vs Liberté) :</strong>
+                    <br>Symbole montagne = liberté, aventure, évolution
+                    <br>Symbole cœur/bébé = amour, partage, connexion
+                    <br>Découverte : deux chemins vers même plénitude et accomplissement
+                </div>
+
+                <div class="example-box">
+                    <strong>Cas Participant (Deux volets stratégie entreprise) :</strong>
+                    <br>Un volet enthousiasme, autre "pas top" mais nécessaire
+                    <br>Résultat : même situation, mais "autre étage" → coordination interne améliorée
+                </div>
+
+                <h3>🛠️ Démonstrations Pratiques</h3>
+                
+                <div class="highlight-box">
+                    <p><strong>Installation posture hypnotique :</strong> Assis, aligné, respiration, yeux fermés, sourire, gratitude</p>
+                    <p><strong>Synchronisation énergétique :</strong> Regard périphérique, calibrage fin, rapport établi</p>
+                    <p><strong>Sensations physiques :</strong> Tiraillements dorsaux, mal de tête initial puis recentrage</p>
+                    <p><strong>Images mentales :</strong> Escaliers devenant colimaçon commun, tour qui s'ancre</p>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>Observations groupe :</strong> Mouvements oculaires, variations température corporelle, difficultés s'arrêter sur ambivalence</p>
+                    <p><strong>Résultats :</strong> Disparition conflit interne, sentiment sérénité, élimination effet pendule</p>
+                </div>
+            </section>
+
+            <section id="techniques" class="section">
+                <h2>🎨 Techniques Avancées & Applications</h2>
+                
+                <h3>🤝 Démarche Cohésion (Paul Pyronnet)</h3>
+                <div class="highlight-box">
+                    <p><strong>Applications :</strong> Couples, familles, équipes, entreprises, associations, même États</p>
+                    <p><strong>Principe :</strong> Faire émerger valeurs membres à plusieurs niveaux</p>
+                    <p><strong>Processus :</strong> Aspirations communes → Projet fort → Mobilisation décuplée</p>
+                    <p><strong>Résultat :</strong> Transformation divisions en complémentarités au service vision partagée</p>
+                </div>
+
+                <h3>💼 Management par les Valeurs</h3>
+                <div class="example-box">
+                    <p><strong>Principe :</strong> Dirigeant s'appuie sur vision, ambition, valeurs authentiques</p>
+                    <p><strong>Approche :</strong> Empathie, accompagnement collaborateurs pour les faire grandir</p>
+                    <p><strong>Résultats :</strong> Forte mobilisation, solution difficultés recrutement, entreprise "fusée"</p>
+                    <p><strong>Témoignage :</strong> Jérôme (électricité) → CV arrivent "tout seuls" grâce aux valeurs</p>
+                </div>
+
+                <h3>🎭 Symbolisation Parties Internes</h3>
+                <div class="mode-grid">
+                    <div class="mode-card">
+                        <div class="mode-title">🏔️ Exemples Métaphores</div>
+                        <ul style="text-align: left;">
+                            <li>Montagne abrupte (liberté, aventure)</li>
+                            <li>Cœur avec bébé (amour, partage)</li>
+                            <li>Sphère lumineuse (aspiration pro)</li>
+                            <li>Plateau familial (stabilité, liens)</li>
+                            <li>Château fort (sécurité)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <div class="mode-title">💡 Utilisation Symboles</div>
+                        <ul style="text-align: left;">
+                            <li>Facilite dialogue interne</li>
+                            <li>Évite jugements mentaux</li>
+                            <li>Accède inconscient créatif</li>
+                            <li>Permet projections futures</li>
+                            <li>Ancrage durable changement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🧠 Aspects Neurologiques & Hypnotiques</h3>
+                <div class="highlight-box">
+                    <p><strong>Effet dissociation :</strong> Attention répartie sur positions multiples</p>
+                    <p><strong>Dimension hypnotique :</strong> États modifiés de conscience naturels</p>
+                    <p><strong>Intégration physique :</strong> Mouvement idéomoteur (rapprochement mains)</p>
+                    <p><strong>Ancrage neurologique :</strong> Nouvelles connexions synaptiques</p>
+                </div>
+            </section>
+
+            <section id="cas-specifiques" class="section">
+                <h2>📝 Cas Spécifiques & Situations</h2>
+                
+                <h3>💼 Conflits Professionnels</h3>
+                <div class="example-box">
+                    <strong>Tiraillement travail/famille :</strong>
+                    <br>• Partie professionnelle → réalisation, utilité, légèreté → paix
+                    <br>• Partie familiale → bienveillance, éducation, bonheur partagé → paix
+                    <br>• Solution : Sécurité financière permet don total famille / Soutien familial = socle carrière
+                </div>
+
+                <h3>❤️ Choix de Vie Personnels</h3>
+                <div class="example-box">
+                    <strong>Maternité vs Liberté (41 ans, célibataire) :</strong>
+                    <br>• Partie montagne → exploration, évolution, accomplissement
+                    <br>• Partie cœur → connexion, partage durable, plénitude
+                    <br>• Découverte : Différents types connexion (soi vs autrui) et partage (éphémère vs construit)
+                </div>
+
+                <h3>🏥 Comportements Santé</h3>
+                <div class="example-box">
+                    <strong>Santé vs Fête/Alcool :</strong>
+                    <br>• Partie santé → bien-être, longévité
+                    <br>• Partie sociale → joie, lien social, détente
+                    <br>• Solution : Nouvelles façons nourrir joie et lien sans nuire santé
+                </div>
+
+                <h3>🏠 Changements Géographiques</h3>
+                <div class="example-box">
+                    <strong>Déménagement (rapprochement fils vs attachement parents) :</strong>
+                    <br>• Partie fils → proximité, soutien, famille
+                    <br>• Partie parents → attachement, racines, histoire
+                    <br>• Recherche : Équilibre géographique ou temporal satisfaisant les deux
+                </div>
+            </section>
+
+            <section id="certification" class="section section-certification">
+                <h2>🎓 Spécificités Certification ADVM</h2>
+                
+                <div class="warning-box">
+                    <p><strong>Position dans cursus :</strong> Protocole niveau Praticien (après recadrage 6 points)</p>
+                    <p><strong>Critères évaluation :</strong> 12/20 minimum</p>
+                    <p><strong>Méthode correction :</strong> Recherche mots-clés dans réponses</p>
+                </div>
+
+                <h3>🎯 Points Évaluation</h3>
+                <div class="mode-grid">
+                    <div class="mode-card">
+                        <div class="mode-title">📝 Épreuve Écrite</div>
+                        <ul style="text-align: left;">
+                            <li>8 étapes du protocole</li>
+                            <li>Différences avec recadrage 6 points</li>
+                            <li>Présupposés PNL (intention positive)</li>
+                            <li>Indications d'usage spécifiques</li>
+                            <li>Vérification écologique</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <div class="mode-title">🎭 Épreuve Pratique</div>
+                        <ul style="text-align: left;">
+                            <li>Identification tiraillement réel</li>
+                            <li>Dissociation correcte (mains)</li>
+                            <li>Exploration intentions positives</li>
+                            <li>Étape "garantie" cruciale</li>
+                            <li>Intégration physique finale</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🏆 Formulations Types Certification</h3>
+                <div class="highlight-box">
+                    <p><strong>Identification :</strong> "Qu'est-ce qui te tiraille entre ces deux directions ?"</p>
+                    <p><strong>Dissociation :</strong> "Place une partie dans chaque main, observe les symboles..."</p>
+                    <p><strong>Intentions :</strong> "Qu'est-ce qui est important pour cette partie ? Que veut-elle nourrir ?"</p>
+                    <p><strong>Garantie :</strong> "En quoi cette partie devient-elle une garantie pour l'autre ?"</p>
+                    <p><strong>Intégration :</strong> "Rapproche lentement tes mains vers ta poitrine..."</p>
+                </div>
+
+                <h3>📚 Conseils Révision</h3>
+                <div class="example-box">
+                    <p><strong>Mots-clés essentiels :</strong> intention positive, dissociation, parties, coopération, ressources, écologie</p>
+                    <p><strong>Ne pas inventer :</strong> Utiliser uniquement concepts vus en formation</p>
+                    <p><strong>Révisions groupées :</strong> 2-4 personnes pour efficacité maximale</p>
+                    <p><strong>Support organisé :</strong> Fiches claires, stabilotées, mind maps disponibles</p>
+                </div>
+            </section>
+
+            <section id="pieges" class="section">
+                <h2>🚨 Pièges à Éviter</h2>
+                
+                <div class="warning-box">
+                    <h4>🔴 Erreurs Majeures</h4>
+                    <ul>
+                        <li><strong>Confondre avec thérapie :</strong> Cadre de coaching, pas thérapeutique</li>
+                        <li><strong>Forcer consensus :</strong> Respecter rythme et résistances naturelles</li>
+                        <li><strong>Oublier écologie :</strong> Vérifier impact sur autres parties internes</li>
+                        <li><strong>Rester intellectuel :</strong> Favoriser expérience sensorielle/émotionnelle</li>
+                        <li><strong>Juger parties :</strong> Accueil inconditionnel de toutes parts de soi</li>
+                        <li><strong>Sauter étapes :</strong> Respecter progression logique du protocole</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Signaux d'Alerte</h4>
+                    <ul>
+                        <li>Personne analyse au lieu de ressentir → Ramener au sensoriel</li>
+                        <li>Jugement d'une partie → Chercher intention positive cachée</li>
+                        <li>Résistance à la symbolisation → Explorer peur ou croyance</li>
+                        <li>Émotions trop intenses → Ralentir, sécuriser</li>
+                        <li>Solutions trop vite trouvées → Vérifier profondeur travail</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="synthese" class="section">
+                <h2>📊 Synthèse Visuelle</h2>
+                
+                <div class="key-points">
+                    <h3>🎯 Schéma Global du Protocole</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; margin: 1rem 0;">
+                        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                            <strong>TIRAILLEMENT</strong> → <strong>DISSOCIATION</strong> → <strong>INTENTIONS</strong> → <strong>COOPÉRATION</strong> → <strong>INTÉGRATION</strong> → <strong>FUTUR</strong>
+                        </p>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>⚡</div>
+                                <div>Conflit</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>👐</div>
+                                <div>2 Mains</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>💎</div>
+                                <div>Intentions+</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🤝</div>
+                                <div>Garantie</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🤲</div>
+                                <div>Poitrine</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🌉</div>
+                                <div>Projection</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-points">
+                    <h3>🎪 Métaphore Médiation Interne</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <strong>👈 PARTIE A</strong> (Main gauche) ↔️ <strong>🧠 MÉDIATEUR</strong> ↔️ <strong>PARTIE B 👉</strong> (Main droite)<br><br>
+                            ❌ <strong>Opposition</strong> → 🤝 <strong>Reconnaissance</strong> → 💎 <strong>Complémentarité</strong> → ✨ <strong>Synergie</strong>
+                        </div>
+                        <p style="margin-top: 1rem; text-align: center; font-style: italic;">
+                            "Si 2 parties s'opposent, elles ne peuvent se rejoindre qu'à un niveau de conscience plus élevé"
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="check-final" class="section">
+                <div class="key-points">
+                    <h2>✅ Checklist Maîtrise Finale</h2>
+                    <div class="points-grid">
+                        <div class="point-card">Je différencie négociation parties vs recadrage 6 pts</div>
+                        <div class="point-card">Je reconnais tiraillement réel entre 2 directions</div>
+                        <div class="point-card">Je dissocie correctement (main G/D)</div>
+                        <div class="point-card">Je explore intentions positives en profondeur</div>
+                        <div class="point-card">Je trouve intention commune élevée</div>
+                        <div class="point-card">Je fais reconnaître complémentarité (garantie)</div>
+                        <div class="point-card">Je vérifie écologie avec autres parties</div>
+                        <div class="point-card">Je réalise intégration physique correcte</div>
+                        <div class="point-card">Je projette vers situations futures</div>
+                        <div class="point-card">J'adapte selon présentiel/distanciel</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="autres-infos" class="section">
+                <h2>📚 Autres Informations</h2>
+                
+                <h3>📄 Position dans Liste 15 Protocoles ADVM</h3>
+                <p><strong>Niveau :</strong> Praticien (protocole 12/15)</p>
+                <p><strong>Prérequis :</strong> Maîtrise recadrage 6 points, auto-ancrage, bases dissociation</p>
+                <p><strong>Suivants :</strong> Protocoles Maître Praticien (marelle croyances, changement d'histoire)</p>
+
+                <h3>📞 Contacts Formation</h3>
+                <div class="example-box">
+                    <p><strong>Paul Pyronnet Institut :</strong> Formation présentiel, démarche cohésion</p>
+                    <p><strong>Cyril Godon :</strong> Cyril.godon@elevatio.fr - Ateliers distanciel</p>
+                    <p><strong>Groupe Facebook :</strong> Ressources révision (mot de passe : Marelle)</p>
+                </div>
+
+                <h3>🌟 Applications Étendues</h3>
+                <div class="highlight-box">
+                    <p><strong>Développement personnel :</strong> Résolution conflits internes majeurs</p>
+                    <p><strong>Coaching :</strong> Accompagnement choix de vie, transitions</p>
+                    <p><strong>Management :</strong> Gestion équipes, médiation conflits</p>
+                    <p><strong>Thérapie :</strong> (Avec formation appropriée) Troubles anxieux, indécision</p>
+                </div>
+
+                <h3>🧠 Principes Neuroscientifiques</h3>
+                <div class="example-box">
+                    <p><strong>Dissociation créative :</strong> Séparation parties permet objectivité</p>
+                    <p><strong>Intelligence coopérative :</strong> Cerveau trouve solutions quand parties collaborent</p>
+                    <p><strong>Intégration somatique :</strong> Mouvement physique ancre changement</p>
+                    <p><strong>Niveaux logiques :</strong> Montée en valeurs résout oppositions comportementales</p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p><strong>Négociation des parties - Guide Révision Praticien ADVM 2025</strong></p>
+            <p>Paul Pyronnet Institut | Cyril Godon Distanciel</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                "Derrière tout comportement il y a une intention positive" - "Nous ne sommes pas nos comportements"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédicats Sensoriels PNL - Niveau Technicien ADVM 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(116, 185, 255, 0.3);
+        }
+
+        .intro-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .canaux-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .canal-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .canal-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .canal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .visuel-card { border-left-color: #e74c3c; }
+        .auditif-card { border-left-color: #f39c12; }
+        .kinesthesique-card { border-left-color: #27ae60; }
+        .olfactif-card { border-left-color: #9b59b6; }
+        .gustatif-card { border-left-color: #3498db; }
+
+        .canal-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .predicats-list {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .predicats-list ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .predicats-list li {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .predicats-list li:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: scale(1.05);
+        }
+
+        .definition-section {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(253, 121, 168, 0.3);
+        }
+
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .concept-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .concept-box:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.02);
+        }
+
+        .points-cles {
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            margin: 25px 0;
+            box-shadow: 0 12px 30px rgba(0, 184, 148, 0.3);
+        }
+
+        .points-cles h3 {
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .points-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .point-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .point-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        .protocole-section {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            margin: 25px 0;
+            box-shadow: 0 15px 35px rgba(162, 155, 254, 0.3);
+        }
+
+        .vigilance-section {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: #2d3436;
+            margin: 25px 0;
+            box-shadow: 0 12px 30px rgba(255, 234, 167, 0.4);
+        }
+
+        .exercice-section {
+            background: linear-gradient(135deg, #55a3ff 0%, #003d82 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            margin: 25px 0;
+            box-shadow: 0 12px 30px rgba(85, 163, 255, 0.3);
+        }
+
+        .citation {
+            font-style: italic;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-left: 4px solid rgba(255,255,255,0.5);
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .exemple-pratique {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .tableau-comparatif {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .tableau-comparatif table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+
+        .tableau-comparatif th,
+        .tableau-comparatif td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tableau-comparatif th {
+            background: rgba(255,255,255,0.1);
+            font-weight: bold;
+        }
+
+        .synthesis {
+            background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(45, 52, 54, 0.3);
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .key-point:hover {
+            border-color: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .numero {
+            background: rgba(255,255,255,0.9);
+            color: #2d3436;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+
+        .non-predicats {
+            background: linear-gradient(135deg, #fab1a0 0%, #e17055 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            margin: 15px 0;
+            box-shadow: 0 10px 25px rgba(250, 177, 160, 0.3);
+        }
+
+        .communication-tips {
+            background: linear-gradient(135deg, #81ecec 0%, #00b894 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            margin: 25px 0;
+            box-shadow: 0 12px 30px rgba(129, 236, 236, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .canaux-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .print-instructions {
+            background: linear-gradient(135deg, #ddd6fe 0%, #8b5cf6 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: #4c1d95;
+            border: 2px dashed #8b5cf6;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; }
+            .print-instructions { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗣️ Prédicats Sensoriels en PNL</h1>
+            <div class="subtitle">Niveau Technicien - Certification ADVM 2025</div>
+        </div>
+
+        <div class="content">
+            <div class="intro-section">
+                <h2>🎯 Introduction</h2>
+                <p><strong>Thématique globale :</strong> Les prédicats sensoriels dans le langage, leur identification et leur rôle dans la communication.</p>
+                <p><strong>Sources intégrées :</strong> Explication + Feedback et REX + Exercice "Maison de rêve" + Applications pratiques</p>
+                <p><strong>Objectif :</strong> Créer un support unique de révision pour la certification technicien, couvrant l'identification des prédicats, les canaux de perception et les applications en communication.</p>
+            </div>
+
+            <div class="definition-section">
+                <h2>🔍 Définition et Concepts Fondamentaux</h2>
+                <div class="concepts-grid">
+                    <div class="concept-box">
+                        <h4>📖 Qu'est-ce qu'un prédicat ?</h4>
+                        <p>Mot qui indique par quel canal sensoriel une personne entre en relation avec une expérience (passé, présent, futur).</p>
+                    </div>
+                    <div class="concept-box">
+                        <h4>🧠 Fonction des prédicats</h4>
+                        <p>Révèlent le mode de fonctionnement perceptif d'un individu lors de la description d'une situation.</p>
+                    </div>
+                    <div class="concept-box">
+                        <h4>⚡ Distinction clé</h4>
+                        <p>Le prédicat indique le CANAL de perception, pas le CONTENU de l'expérience.</p>
+                    </div>
+                    <div class="concept-box">
+                        <h4>🎭 Citation centrale</h4>
+                        <p><em>"Le prédicat, c'est le mot qui vous indique par quel canal mon cerveau droit est en train de passer pour décrire l'expérience."</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canaux-grid">
+                <div class="canal-card visuel-card">
+                    <h3>🔴 Canal Visuel</h3>
+                    <p><strong>Fonction :</strong> Ce qui est vu, observé, imaginé</p>
+                    <div class="predicats-list">
+                        <h4>Prédicats visuels :</h4>
+                        <ul>
+                            <li>voir</li>
+                            <li>regarder</li>
+                            <li>observer</li>
+                            <li>contempler</li>
+                            <li>éclairer</li>
+                            <li>visualiser</li>
+                            <li>scruter</li>
+                            <li>imaginer</li>
+                        </ul>
+                    </div>
+                    <p><strong>Caractéristique :</strong> La plupart des gens sont plutôt visuels selon les observations.</p>
+                </div>
+
+                <div class="canal-card auditif-card">
+                    <h3>🟠 Canal Auditif</h3>
+                    <p><strong>Fonction :</strong> Ce qui est entendu, écouté, exprimé</p>
+                    <div class="predicats-list">
+                        <h4>Prédicats auditifs :</h4>
+                        <ul>
+                            <li>écouter</li>
+                            <li>entendre</li>
+                            <li>dire</li>
+                            <li>exprimer</li>
+                            <li>affirmer</li>
+                            <li>crier</li>
+                            <li>chanter</li>
+                            <li>murmurer</li>
+                            <li>hurler</li>
+                            <li>sonne</li>
+                            <li>raconter</li>
+                            <li>appeler</li>
+                            <li>échanger</li>
+                            <li>discuter</li>
+                        </ul>
+                    </div>
+                    <p><strong>Indices comportementaux :</strong> Ferme les yeux pour parler, privilégie les appels aux SMS, écoute des podcasts.</p>
+                </div>
+
+                <div class="canal-card kinesthesique-card">
+                    <h3>🟢 Canal Kinesthésique</h3>
+                    <p><strong>Fonction :</strong> Ce qui est ressenti, touché, éprouvé</p>
+                    <div class="predicats-list">
+                        <h4>Prédicats kinesthésiques :</h4>
+                        <ul>
+                            <li>ressentir</li>
+                            <li>toucher</li>
+                            <li>vibrer</li>
+                            <li>froid</li>
+                            <li>chaud</li>
+                            <li>détendu</li>
+                            <li>douloureux</li>
+                            <li>noué</li>
+                            <li>relâché</li>
+                            <li>confortable</li>
+                            <li>impression</li>
+                            <li>pression</li>
+                            <li>excitation</li>
+                            <li>tendu</li>
+                            <li>agité</li>
+                            <li>onctueux</li>
+                            <li>croustillant</li>
+                            <li>moelleux</li>
+                        </ul>
+                    </div>
+                    <p><strong>Particularité :</strong> Souvent associé aux émotions et sensations physiques.</p>
+                </div>
+
+                <div class="canal-card olfactif-card">
+                    <h3>🟣 Canal Olfactif</h3>
+                    <p><strong>Fonction :</strong> Ce qui est senti par l'odorat</p>
+                    <div class="predicats-list">
+                        <h4>Prédicats olfactifs :</h4>
+                        <ul>
+                            <li>sentir (odeur)</li>
+                            <li>parfumé</li>
+                            <li>épicé</li>
+                            <li>poivré</li>
+                            <li>fruité</li>
+                            <li>capiteux</li>
+                            <li>bouchonné</li>
+                            <li>grillé</li>
+                            <li>brûlé</li>
+                            <li>boisé</li>
+                            <li>insipide</li>
+                        </ul>
+                    </div>
+                    <p><strong>Note :</strong> Canal souvent moins développé chez beaucoup de personnes.</p>
+                </div>
+
+                <div class="canal-card gustatif-card">
+                    <h3>🔵 Canal Gustatif</h3>
+                    <p><strong>Fonction :</strong> Ce qui est goûté, dégusté</p>
+                    <div class="predicats-list">
+                        <h4>Prédicats gustatifs :</h4>
+                        <ul>
+                            <li>goûteux</li>
+                            <li>sucré</li>
+                            <li>salé</li>
+                            <li>dégusté</li>
+                            <li>savoureux</li>
+                            <li>amer</li>
+                            <li>délicieux</li>
+                            <li>épicé</li>
+                            <li>piquant</li>
+                            <li>aigre</li>
+                            <li>acide</li>
+                        </ul>
+                    </div>
+                    <p><strong>Application :</strong> Particulièrement important dans la description d'environnements (cuisine, cave).</p>
+                </div>
+            </div>
+
+            <div class="non-predicats">
+                <h3>❌ Ce qui N'EST PAS un prédicat</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>Mots descriptifs</h4>
+                        <ul>
+                            <li>paysage</li>
+                            <li>ciel bleu</li>
+                            <li>blanc</li>
+                            <li>texture</li>
+                            <li>beau</li>
+                            <li>magique</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>Mots ambigus</h4>
+                        <ul>
+                            <li>Mots utilisables dans plusieurs canaux</li>
+                            <li>Contenus sans indication de canal</li>
+                            <li>Sub-modalités (ex: "lumineux")</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>Règle de base</h4>
+                        <p><strong>Un mot n'est un prédicat QUE s'il indique clairement le canal de perception utilisé.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocole-section">
+                <h2>⚙️ Protocole d'Identification des Prédicats</h2>
+                <h3>🎯 Objectif</h3>
+                <p>Développer la capacité d'écoute active pour repérer les canaux sensoriels privilégiés dans le discours et adapter sa communication.</p>
+                
+                <h3>📋 Méthode des 5 Colonnes</h3>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Étape 1 :</strong> Préparer une feuille avec 5 colonnes (Visuel | Auditif | Kinesthésique | Olfactif | Gustatif)</p>
+                    <p><strong>Étape 2 :</strong> Écouter attentivement le discours de la personne</p>
+                    <p><strong>Étape 3 :</strong> Placer chaque prédicat identifié dans la colonne correspondante</p>
+                    <p><strong>Étape 4 :</strong> Analyser quel canal a été le plus utilisé</p>
+                    <p><strong>Étape 5 :</strong> Valider les mots identifiés comme vrais prédicats</p>
+                </div>
+
+                <h3>🔍 Questions de Clarification</h3>
+                <div class="tableau-comparatif">
+                    <table>
+                        <tr>
+                            <th>Canal à explorer</th>
+                            <th>Questions orientées</th>
+                        </tr>
+                        <tr>
+                            <td>Visuel</td>
+                            <td>"Qu'as-tu vu ? Comment ça se présentait visuellement ?"</td>
+                        </tr>
+                        <tr>
+                            <td>Auditif</td>
+                            <td>"Qu'as-tu entendu ? Quels sons t'ont marqué ?"</td>
+                        </tr>
+                        <tr>
+                            <td>Kinesthésique</td>
+                            <td>"Qu'as-tu ressenti ? Quelles sensations ?"</td>
+                        </tr>
+                        <tr>
+                            <td>Olfactif</td>
+                            <td>"Quelles odeurs étaient présentes ?"</td>
+                        </tr>
+                        <tr>
+                            <td>Gustatif</td>
+                            <td>"Quels goûts associes-tu à cette expérience ?"</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="points-cles">
+                <h3>🎯 10 Points Clés Essentiels</h3>
+                <div class="points-list">
+                    <div class="point-item">
+                        <strong>1.</strong> Un prédicat indique le CANAL de perception, pas le contenu de l'expérience.
+                    </div>
+                    <div class="point-item">
+                        <strong>2.</strong> Différencier clairement contenu et prédicat lors de l'analyse.
+                    </div>
+                    <div class="point-item">
+                        <strong>3.</strong> Un mot ambiguë utilisable dans plusieurs canaux n'est PAS un prédicat.
+                    </div>
+                    <div class="point-item">
+                        <strong>4.</strong> Les émotions ne sont pas des prédicats, mais leur description révèle le canal.
+                    </div>
+                    <div class="point-item">
+                        <strong>5.</strong> La plupart des gens ont une dominante visuelle selon les observations.
+                    </div>
+                    <div class="point-item">
+                        <strong>6.</strong> L'enrichissement du vocabulaire sensoriel améliore la relation au monde.
+                    </div>
+                    <div class="point-item">
+                        <strong>7.</strong> La synchronisation sur le canal privilégié améliore la communication.
+                    </div>
+                    <div class="point-item">
+                        <strong>8.</strong> Les descriptions sensorielles accentuent les réactions physiologiques.
+                    </div>
+                    <div class="point-item">
+                        <strong>9.</strong> L'observation des comportements aide à identifier le canal dominant.
+                    </div>
+                    <div class="point-item">
+                        <strong>10.</strong> L'entraînement conscient développe la sensibilité sensorielle.
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercice-section">
+                <h2>🏋️ Exercices Pratiques Niveau Technicien</h2>
+                
+                <h3>🏠 Exercice 1 : La Maison de Rêve</h3>
+                <div class="exemple-pratique">
+                    <p><strong>Configuration :</strong> Groupes de 3 personnes, rotation des rôles</p>
+                    <p><strong>Objectif :</strong> Éveil sensoriel et enrichissement du vocabulaire</p>
+                    <h4>📝 Déroulement par tours :</h4>
+                    <ol>
+                        <li><strong>Tour Visuel :</strong> Décrire 3-4 caractéristiques visuelles de sa maison idéale</li>
+                        <li><strong>Tour Auditif :</strong> Identifier les sons stimulants dans cet environnement</li>
+                        <li><strong>Tour Kinesthésique :</strong> Décrire les sensations et textures souhaitées</li>
+                        <li><strong>Tour Olfactif :</strong> Évoquer les parfums dans différents espaces</li>
+                        <li><strong>Tour Gustatif :</strong> Associer des goûts à la cuisine, cave, jardin</li>
+                    </ol>
+                </div>
+
+                <h3>👂 Exercice 2 : Écoute Active et Identification</h3>
+                <div class="exemple-pratique">
+                    <p><strong>Configuration :</strong> Groupes de 3 (1 narrateur, 2 observateurs)</p>
+                    <p><strong>Durée :</strong> 5-7 minutes par personne</p>
+                    <h4>📝 Process :</h4>
+                    <ol>
+                        <li>Le narrateur raconte une expérience positive et stimulante</li>
+                        <li>Les observateurs posent questions neutres et orientées</li>
+                        <li>Repérage des prédicats sans prise de notes (écoute pure)</li>
+                        <li>Rotation des rôles pour diversifier les modèles</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="communication-tips">
+                <h2>💬 Applications en Communication</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🎯 Synchronisation</h4>
+                        <p><strong>Principe :</strong> Identifier le canal dominant de l'interlocuteur et s'y adapter.</p>
+                        <p><strong>Technique :</strong> Utiliser les mêmes types de prédicats que la personne dans sa réponse.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🌟 Enrichissement</h4>
+                        <p><strong>Objectif :</strong> Solliciter plusieurs canaux pour une communication plus vivante.</p>
+                        <p><strong>Impact :</strong> Description sensorielle = réaction physiologique plus forte.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🔄 Guidage</h4>
+                        <p><strong>Méthode :</strong> Une fois synchronisé, explorer d'autres canaux pour enrichir l'expérience.</p>
+                        <p><strong>Application :</strong> Particulièrement utile en accompagnement.</p>
+                    </div>
+                </div>
+                
+                <div class="citation" style="margin-top: 25px;">
+                    <strong>Citation clé :</strong> "Plus vous allez utiliser et enrichir vos prédicats, plus évidemment vous allez kiffer vous et votre environnement."
+                </div>
+            </div>
+
+            <div class="vigilance-section">
+                <h2>⚠️ Points de Vigilance et Pièges</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>❌ Erreurs fréquentes</h4>
+                        <ul>
+                            <li>Confondre contenu et prédicat</li>
+                            <li>Considérer les émotions comme prédicats</li>
+                            <li>Accepter les mots ambigus comme prédicats</li>
+                            <li>Négliger le contexte d'utilisation</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>✅ Bonnes pratiques</h4>
+                        <ul>
+                            <li>Écouter la tournure complète de phrase</li>
+                            <li>Demander des clarifications si ambigu</li>
+                            <li>Observer les comportements associés</li>
+                            <li>Pratiquer régulièrement l'identification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔍 Cas Particuliers</h3>
+                <div class="exemple-pratique">
+                    <h4>Gestion des mots ambigus :</h4>
+                    <p><strong>Exemple avec "bleu" :</strong></p>
+                    <ul>
+                        <li>"Je vois que le ciel est bleu" → Visuel</li>
+                        <li>"J'ai entendu dire que le ciel est bleu" → Auditif</li>
+                        <li>"Le bleu m'apaise" → Kinesthésique</li>
+                    </ul>
+                    <p><strong>Règle :</strong> Le canal dépend de la tournure de phrase, pas du mot isolé.</p>
+                </div>
+
+                <div class="exemple-pratique">
+                    <h4>Distinction émotion/prédicat :</h4>
+                    <p><strong>L'émotion "peur" selon les canaux :</strong></p>
+                    <ul>
+                        <li>"Je sens que j'ai peur" → Kinesthésique</li>
+                        <li>"Je vois qu'il a peur" → Visuel</li>
+                        <li>"Je me dis que j'aurais peur" → Auditif</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="protocole-section">
+                <h2>🚀 Applications Avancées Niveau Technicien</h2>
+                
+                <h3>💼 En Accompagnement Professionnel</h3>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <p><strong>Stratégie en 3 étapes :</strong></p>
+                    <ol>
+                        <li><strong>Identification :</strong> Repérer le canal dominant du client</li>
+                        <li><strong>Synchronisation :</strong> Adopter le même canal dans les réponses</li>
+                        <li><strong>Exploration :</strong> Guider vers d'autres canaux pour enrichir l'expérience</li>
+                    </ol>
+                </div>
+
+                <h3>🎓 En Formation et Enseignement</h3>
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <p><strong>Impact multiplicateur :</strong> Un enseignant utilisant plusieurs canaux sensoriels capte mieux l'attention et marque davantage les esprits.</p>
+                    <p><strong>Technique :</strong> Enrichir ses descriptions avec des prédicats de tous les canaux.</p>
+                    <p><strong>Exemple :</strong> Au lieu de "j'ai été sur une plage", décrire "la beauté de la plage, la sensation du sable entre les doigts de pieds, l'impression des embruns, l'eau qui ruisselle..."</p>
+                </div>
+
+                <h3>💬 En Communication Quotidienne</h3>
+                <div class="tableau-comparatif">
+                    <table>
+                        <tr>
+                            <th>Canal détecté</th>
+                            <th>Indices comportementaux</th>
+                            <th>Adaptation recommandée</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Visuel dominant</strong></td>
+                            <td>Regards vers le haut, gestes descriptifs</td>
+                            <td>Utiliser "voir", "regarder", "imaginer"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auditif dominant</strong></td>
+                            <td>Ferme les yeux, préfère téléphone</td>
+                            <td>Utiliser "entendre", "écouter", "dire"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kinesthésique dominant</strong></td>
+                            <td>Gestes tactiles, expressions corporelles</td>
+                            <td>Utiliser "ressentir", "toucher", "vibrer"</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="exercice-section">
+                <h2>🎯 Développement de la Sensibilité Sensorielle</h2>
+                
+                <h3>🌲 Exercice d'Observation Consciente</h3>
+                <div class="exemple-pratique">
+                    <p><strong>Protocole :</strong> Se promener en forêt avec attention consciente</p>
+                    <p><strong>Focus Visuel :</strong> Observer tous les dégradés de couleurs, formes, profondeurs de champ, espaces</p>
+                    <p><strong>Focus Auditif :</strong> Écouter la diversité des sons naturels</p>
+                    <p><strong>Focus Kinesthésique :</strong> Ressentir les textures, températures, mouvements d'air</p>
+                    <p><strong>Objectif :</strong> Enrichir le vocabulaire sensoriel et affiner la perception</p>
+                </div>
+
+                <h3>🎵 Développement Spécifique par Canal</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>📚 Pour l'Auditif</h4>
+                        <p>Méthode Tomatis ou exercices d'écoute musicale pour développer la finesse auditive.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>🍷 Pour l'Olfactif</h4>
+                        <p>Dégustation consciente, exercices de reconnaissance d'arômes.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <h4>🤲 Pour le Kinesthésique</h4>
+                        <p>Exercices tactiles, méditation corporelle, conscience des sensations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="citation" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white; padding: 25px; border-radius: 15px; margin: 25px 0;">
+                <h3>💡 Citations Clés à Retenir</h3>
+                <div style="display: grid; gap: 15px; margin-top: 15px;">
+                    <p><em>"Ce qui m'intéresse, c'est comment la personne est en train de fonctionner pour ressentir ce qu'elle ressent dans ce contexte-là."</em></p>
+                    <p><em>"La manière dont toi tu vas le traduire n'est pas forcément la manière dont l'autre va le traduire."</em></p>
+                    <p><em>"Dès que vous engagez le monde émotionnel, évidemment, il va y avoir une pluie de mots."</em></p>
+                    <p><em>"Plus vous avez de vocabulaire, plus vous avez une conscience aiguisée de ces éléments. Et ça enrichit énormément votre relation au monde."</em></p>
+                </div>
+            </div>
+
+            <div class="synthesis">
+                <h2>📊 Synthèse Visuelle - 10 Points Clés à Retenir</h2>
+                <div class="key-points-grid">
+                    <div class="key-point">
+                        <div class="numero">1</div>
+                        <strong>Définition</strong><br>
+                        Prédicat = indication du canal de perception, pas du contenu
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">2</div>
+                        <strong>5 Canaux</strong><br>
+                        Visuel, Auditif, Kinesthésique, Olfactif, Gustatif
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">3</div>
+                        <strong>Dominante Visuelle</strong><br>
+                        La plupart des gens privilégient le canal visuel
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">4</div>
+                        <strong>Distinction Cruciale</strong><br>
+                        Différencier contenu/prédicat et émotion/canal
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">5</div>
+                        <strong>Mots Ambigus</strong><br>
+                        Ne sont PAS des prédicats s'ils manquent de spécificité
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">6</div>
+                        <strong>Synchronisation</strong><br>
+                        S'adapter au canal privilégié de l'interlocuteur
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">7</div>
+                        <strong>Enrichissement</strong><br>
+                        Plus de vocabulaire = relation plus riche au monde
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">8</div>
+                        <strong>Impact Physiologique</strong><br>
+                        Descriptions sensorielles = réactions plus intenses
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">9</div>
+                        <strong>Observation Comportementale</strong><br>
+                        Indices corporels révèlent les canaux dominants
+                    </div>
+                    <div class="key-point">
+                        <div class="numero">10</div>
+                        <strong>Entraînement Conscient</strong><br>
+                        La pratique développe la sensibilité sensorielle
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercice-section">
+                <h2>📝 Autres Informations en Vrac</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🧠 Neurologie et Prédicats</h4>
+                        <p>Le cerveau droit est sollicité par les descriptions sensorielles, rendant la communication plus captivante et mémorable.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>👨‍🏫 Applications Pédagogiques</h4>
+                        <p>Un enseignant utilisant plusieurs canaux sensoriels a plus d'impact qu'un enseignant mono-canal. La forme prime parfois sur le fond.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🎭 Développement Personnel</h4>
+                        <p>L'éveil sensoriel est particulièrement bénéfique pour les adolescents pour mieux comprendre leur diversité sensorielle.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🍷 Exemple Concret</h4>
+                        <p>L'expérience du vol en avion de chasse illustre parfaitement l'utilisation naturelle de tous les canaux dans une description riche.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>🔄 Synergie de Groupe</h4>
+                        <p>Travailler à plusieurs cerveaux enrichit les perspectives sensorielles et génère plus d'idées créatives.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <h4>⚡ État Émotionnel</h4>
+                        <p>Plus l'état émotionnel est intense, plus la "pluie de mots" et de prédicats sera riche dans le discours.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="print-instructions">
+                <h3>🖨️ Instructions d'impression PDF</h3>
+                <p><strong>Pour générer le PDF :</strong></p>
+                <ol>
+                    <li>Ctrl+P (ou Cmd+P sur Mac)</li>
+                    <li>Destination : Enregistrer au format PDF</li>
+                    <li>Format : A4</li>
+                    <li>Orientation : Portrait</li>
+                    <li>Marges : Standard</li>
+                    <li>Options : Cocher 'Arrière-plans graphiques' et 'En-têtes et pieds de page'</li>
+                    <li>Échelle : 100%</li>
+                </ol>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); padding: 25px; border-radius: 15px; color: white; margin: 30px 0; text-align: center; box-shadow: 0 10px 30px rgba(116, 185, 255, 0.3);">
+                <h3 style="margin-bottom: 15px;">🎓 Document Consolidé Niveau Technicien ADVM 2025</h3>
+                <p style="font-size: 1.1em; margin-bottom: 10px;">Support unique de révision pour la certification</p>
+                <p style="opacity: 0.9;">Prédicats Sensoriels • Communication • Applications Pratiques</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Animation d'apparition des éléments
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.canal-card, .point-item, .key-point');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Effet de surlignage au survol pour les prédicats
+        document.querySelectorAll('.predicats-list li').forEach(predicate => {
+            predicate.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(52, 152, 219, 0.3)';
+                this.style.fontWeight = 'bold';
+            });
+            predicate.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(255, 255, 255, 0.8)';
+                this.style.fontWeight = '500';
+            });
+        });
+
+        // Mise en évidence des citations
+        document.querySelectorAll('.citation').forEach(citation => {
+            citation.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            citation.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
+                    

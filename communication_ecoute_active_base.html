@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Écoute Active - Base ADVM 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><rect width="11" height="11" x="10" y="10" fill="url(%23a)"/><rect width="11" height="11" x="20" y="10" fill="url(%23a)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .nav-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .section-concepts { border-left-color: #4facfe; }
+        .section-protocole { border-left-color: #43e97b; }
+        .section-differences { border-left-color: #fa709a; }
+        .section-vigilance { border-left-color: #ffcd3c; }
+        .section-ateliers { border-left-color: #a8edea; }
+        .section-faq { border-left-color: #d299c2; }
+        .section-certification { border-left-color: #667eea; }
+        
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .protocol-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .step-number {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f093fb;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .mode-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .mode-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .mode-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .faq-item {
+            background: rgba(74, 85, 104, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background: rgba(74, 85, 104, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-points {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(250, 112, 154, 0.3);
+        }
+        
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .point-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            font-weight: 500;
+        }
+        
+        .technique-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .technique-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .comparison-card {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                background: white;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💬 Communication & Écoute Active</h1>
+            <p class="subtitle">Guide de Révision - Certification Base ADVM 2025</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Paul Pyronnet Institut | Version Présentiel & Distanciel
+            </div>
+        </header>
+
+        <nav class="nav-grid">
+            <a href="#concepts" class="nav-item">🎯 Concepts Clés</a>
+            <a href="#protocole" class="nav-item">⚙️ Protocole Détaillé</a>
+            <a href="#techniques" class="nav-item">🛠️ Techniques PNL</a>
+            <a href="#differences" class="nav-item">📊 Présentiel vs Distanciel</a>
+            <a href="#vigilance" class="nav-item">⚠️ Points de Vigilance</a>
+            <a href="#ateliers" class="nav-item">🎪 Ateliers & Questions</a>
+            <a href="#certification" class="nav-item">🎓 Spécificités Certification</a>
+            <a href="#synthese" class="nav-item">📊 Synthèse Visuelle</a>
+        </nav>
+
+        <div class="content">
+            <section id="introduction" class="section">
+                <h2>📋 Introduction</h2>
+                <p><strong>Thématique globale :</strong> Maîtrise de la communication PNL et des techniques d'écoute active pour créer des relations de qualité</p>
+                <p><strong>Sources intégrées :</strong></p>
+                <ul>
+                    <li>Ateliers écoute active - Cyril Godon (Distanciel)</li>
+                    <li>Documentation théorique communication PNL</li>
+                    <li>Exercices pratiques et retours d'expérience</li>
+                    <li>Techniques de gestion des conflits relationnels</li>
+                    <li>Méthodes de synchronisation et considération</li>
+                </ul>
+                <p><strong>Objectif :</strong> Créer un support unique de révision pour la certification base ADVM</p>
+                
+                <div class="key-points">
+                    <h3>🌟 10 Points Clés à Retenir</h3>
+                    <div class="points-grid">
+                        <div class="point-card">👂 Écoute active = 95% du travail PNL</div>
+                        <div class="point-card">🔄 3 niveaux : conscient/préconscient/inconscient</div>
+                        <div class="point-card">✅ Oui physiologique obligatoire</div>
+                        <div class="point-card">🪞 Reformulation exacte des mots</div>
+                        <div class="point-card">❓ Relance pour précision</div>
+                        <div class="point-card">🤝 Synchronisation naturelle</div>
+                        <div class="point-card">💭 Intention positive toujours</div>
+                        <div class="point-card">🎯 Considération avant demande</div>
+                        <div class="point-card">🔄 Boucle relationnelle vs nœud</div>
+                        <div class="point-card">❤️ Relation prime sur tout</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="concepts" class="section section-concepts">
+                <h2>🎯 Concepts & Fondamentaux</h2>
+                
+                <h3>Définition Communication PNL</h3>
+                <div class="highlight-box">
+                    <strong>💬 Communication PNL :</strong> Vecteur numéro un pour grandir avec soi et l'environnement. Il n'y a pas d'évolution sans communication selon la PNL.
+                </div>
+                
+                <div class="example-box">
+                    <strong>🎭 Principe :</strong> Favoriser la rencontre, l'union et la croissance par les différences, ou au contraire entraîner la division selon la qualité de l'interaction.
+                </div>
+
+                <h3>Citation de Référence</h3>
+                <div class="warning-box">
+                    <p><strong>Richard Bandler :</strong> "Un bon travail en PNL, c'est 95% de collecte d'informations et 5% d'intervention"</p>
+                    <p><strong>Carl Rogers :</strong> "L'écoute, elle est gratuite"</p>
+                </div>
+
+                <h3>Les 3 Niveaux de Communication</h3>
+                
+                <div class="technique-card">
+                    <div class="technique-title">
+                        <span>1️⃣</span> Niveau Conscient
+                    </div>
+                    <p>Limité à 5-9 informations simultanées. Ce sur quoi on porte consciemment son attention.</p>
+                </div>
+
+                <div class="technique-card">
+                    <div class="technique-title">
+                        <span>2️⃣</span> Niveau Préconscient
+                    </div>
+                    <p>Habitudes, programmations, apprentissages. Influence perceptions, sentiments et comportements automatiques.</p>
+                </div>
+
+                <div class="technique-card">
+                    <div class="technique-title">
+                        <span>3️⃣</span> Niveau Inconscient/Subconscient
+                    </div>
+                    <p>Associations émotionnelles, souvenirs profonds. Fonctionne par liens sensoriels et émotionnels.</p>
+                </div>
+
+                <h3>Mots Clés Techniques</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0;">
+                    <span class="badge">Écoute active</span>
+                    <span class="badge">Reformulation</span>
+                    <span class="badge">Relance</span>
+                    <span class="badge">Synchronisation</span>
+                    <span class="badge">Oui physiologique</span>
+                    <span class="badge">Considération</span>
+                    <span class="badge">Intention positive</span>
+                    <span class="badge">Boucle relationnelle</span>
+                </div>
+
+                <h3>Prérequis Écoute Active</h3>
+                <div class="example-box">
+                    <p><strong>Disponibilité :</strong> Ne pas être occupé par autre tâche, avoir créneau dédié</p>
+                    <p><strong>Présence :</strong> Être mentalement et attentionnellement avec la personne</p>
+                    <p><strong>Si absent :</strong> "Est-ce qu'on peut en parler tout à l'heure ?" - Proposer autre moment</p>
+                </div>
+            </section>
+
+            <section id="protocole" class="section section-protocole">
+                <h2>⚙️ Protocole Écoute Active</h2>
+                
+                <div class="protocol-step">
+                    <div class="step-number">1</div>
+                    <strong>Se taire et écouter :</strong> Base fondamentale. Être présent, regarder, utiliser signaux non-verbaux (signes de tête). Si vous parlez, vous n'écoutez pas.
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">2</div>
+                    <strong>La Relance :</strong> Prendre mot/expression de l'autre et renvoyer en question. "Quand tu dis..." ou "Quand tu dis que..." pour l'inviter à préciser.
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">3</div>
+                    <strong>La Reformulation :</strong> "Ce que tu me dis, c'est que..." Redire avec mots EXACTS de la personne. Viser le "oui physiologique".
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">4</div>
+                    <strong>Validation :</strong> Obtenir confirmation que la personne se sent comprise. Signal : hochement de tête + "oui c'est ça".
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">5</div>
+                    <strong>Synthèse finale :</strong> Résumer points importants en utilisant mots de la personne pour validation finale.
+                </div>
+
+                <h3>🎯 Principe du "Oui Physiologique"</h3>
+                <div class="highlight-box">
+                    <p><strong>Objectif :</strong> Réaction positive inconsciente (oui + signe de tête) qui indique compréhension profonde</p>
+                    <p><strong>Effet émotion négative :</strong> La vide, fait place à nouvelles pensées</p>
+                    <p><strong>Effet émotion positive :</strong> L'amplifie, lui donne plus de sens</p>
+                    <p><strong>Mesure efficacité :</strong> Plus de "oui physiologiques" = meilleure écoute</p>
+                </div>
+            </section>
+
+            <section id="techniques" class="section section-protocole">
+                <h2>🛠️ Techniques Avancées PNL</h2>
+                
+                <h3>🔄 Gestion Nœud vs Boucle Relationnelle</h3>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #2d3748;">
+                        <h4>❌ Nœud Relationnel (Conflit)</h4>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>Affirmer :</strong> "Tu vois bien que..."</li>
+                            <li><strong>Généraliser :</strong> "Toujours pareil avec toi"</li>
+                            <li><strong>Rejeter :</strong> Langage non-verbal fermé</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <h4>✅ Boucle Relationnelle (Résolution)</h4>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>Questions :</strong> "Qu'est-ce qui te fait dire ça ?"</li>
+                            <li><strong>Précision :</strong> "Sur quoi exactement ?"</li>
+                            <li><strong>Accueil :</strong> "Ah oui, t'as raison..."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📞 Techniques Spécifiques Relance</h3>
+                <div class="example-box">
+                    <p><strong>Phrase :</strong> "J'ai un problème qui me prend la tête"</p>
+                    <p><strong>Relances possibles :</strong> "Problème ?" ou "Prend la tête ?"</p>
+                    <hr style="margin: 1rem 0;">
+                    <p><strong>Phrase :</strong> "Je suis dégoûté par son comportement"</p>
+                    <p><strong>Relance :</strong> "Quand tu dis son comportement ?"</p>
+                    <hr style="margin: 1rem 0;">
+                    <p><strong>Phrase :</strong> "Je galère avec certains élèves"</p>
+                    <p><strong>Relances :</strong> "Certains élèves ?" ou "Galères ?"</p>
+                </div>
+
+                <h3>🤝 Synchronisation Relationnelle</h3>
+                <div class="mode-grid">
+                    <div class="mode-card">
+                        <div class="mode-title">👥 Physique</div>
+                        <p>Même hauteur, posture similaire, contact visuel, sourire ensemble</p>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <div class="mode-title">🗣️ Verbale</div>
+                        <p>Même vitesse, vocabulaire adapté, débit similaire, énergie ajustée</p>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <div class="mode-title">💭 Émotionnelle</div>
+                        <p>Rejoindre état émotionnel avant transformation, accueillir où la personne en est</p>
+                    </div>
+                </div>
+
+                <h3>💝 Art de la Considération</h3>
+                <div class="highlight-box">
+                    <p><strong>Principe :</strong> Besoin d'être entendu > besoin d'être satisfait</p>
+                    <p><strong>Reconnaissance expérience :</strong> Valider ce que la personne vit, pas forcément être d'accord</p>
+                    <p><strong>Preuves concrètes :</strong> Gestes, paroles, attention manifestée</p>
+                    <p><strong>Timing :</strong> TOUJOURS passer par considération AVANT formulation demande</p>
+                </div>
+            </section>
+
+            <section id="vigilance" class="section section-vigilance">
+                <h2>⚠️ Points de Vigilance</h2>
+                
+                <h3>🚫 Les 10 Pièges de l'Écoute (Christelle Petitcollin)</h3>
+                <div class="warning-box">
+                    <ol>
+                        <li><strong>Finir phrases de l'autre :</strong> Coupe lien, empêche développement pensée</li>
+                        <li><strong>Donner conseils non sollicités :</strong> Quitte posture écoute pour conseiller</li>
+                        <li><strong>Rectifier erreurs factuelles :</strong> Détourne attention du message principal</li>
+                        <li><strong>Rappeler ses souvenirs :</strong> Ramène conversation à soi</li>
+                        <li><strong>Curiosité personnelle :</strong> Questions pour soi, pas pour aider l'autre</li>
+                        <li><strong>Déni/minimisation :</strong> "C'est pas si grave" - Nie expérience</li>
+                        <li><strong>Jugements valeur :</strong> "Je te l'avais dit" - Violent</li>
+                        <li><strong>Faire diagnostic :</strong> Analyser situation de l'autre</li>
+                        <li><strong>Consoler bons sentiments :</strong> Calmer émotion = déni ressenti</li>
+                        <li><strong>Chercher cadeau caché :</strong> Mauvais timing pour remarques positives</li>
+                    </ol>
+                </div>
+
+                <h3>🔍 Facteurs Réduisant Qualité Écoute</h3>
+                <div class="example-box">
+                    <p><strong>Références personnelles :</strong> Va-et-vient mental entre discours autre et ses expériences</p>
+                    <p><strong>Enjeu émotionnel :</strong> Désaccord, frustration, lien affectif complique écoute</p>
+                    <p><strong>Manque disponibilité :</strong> Distraction, fatigue, multi-tâches</p>
+                    <p><strong>Perte état interne :</strong> Dès qu'on perd calme, on perd compétences écoute</p>
+                </div>
+
+                <h3>🚨 Erreurs Fréquentes</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Synonymes interdits :</strong> "Père" vs "papa" - Utiliser mots EXACTS</li>
+                        <li><strong>Questions multiples :</strong> Une seule question à la fois</li>
+                        <li><strong>Précipitation :</strong> Vouloir accélérer processus émotionnel</li>
+                        <li><strong>Accord vs accueil :</strong> Accueillir ≠ être d'accord</li>
+                        <li><strong>Feedback manquant :</strong> Contact visuel essentiel</li>
+                    </ul>
+                </div>
+
+                <h3>⚖️ Situations Délicates</h3>
+                <div class="highlight-box">
+                    <p><strong>Proches difficiles à écouter :</strong> Ils nous touchent émotionnellement, perdre état interne</p>
+                    <p><strong>Hiérarchie :</strong> Partage émotionnel avec manager = risque si pas confiance</p>
+                    <p><strong>Plaintes répétitives :</strong> Valider expérience avec mots exacts pour casser cycle</p>
+                    <p><strong>Logorrhée :</strong> Cadrer temps, méta-communiquer, peut être stratégie défense</p>
+                </div>
+            </section>
+
+            <section id="differences" class="section section-differences">
+                <h2>📊 Spécificités Présentiel vs Distanciel</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3>🏢 Présentiel (Paul)</h3>
+                        <ul style="text-align: left;">
+                            <li>Calibrage direct non-verbal</li>
+                            <li>Synchronisation physique complète</li>
+                            <li>Gestion réactions physiques</li>
+                            <li>Proximité rassurante</li>
+                            <li>Feedback immédiat</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <h3>💻 Distanciel (Cyril)</h3>
+                        <ul style="text-align: left;">
+                            <li>Casque obligatoire</li>
+                            <li>Attention feedback auditif</li>
+                            <li>Instructions très précises</li>
+                            <li>Calibrage respiration/tonalité</li>
+                            <li>Éviter cas émotionnels lourds</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🎧 Adaptations Distanciel</h3>
+                <div class="highlight-box">
+                    <p><strong>Consignes Cyril :</strong> "Casque, debout dans salon, imagine-moi à ta droite"</p>
+                    <p><strong>Calibrage :</strong> Respiration, tonalité, silences, paraverbal</p>
+                    <p><strong>Sécurité :</strong> Valider capacité continuer, éviter cas lourds</p>
+                    <p><strong>Feedback :</strong> Utiliser reformulation plus fréquente pour compenser</p>
+                </div>
+            </section>
+
+            <section id="ateliers" class="section section-ateliers">
+                <h2>🎪 Ateliers & Questions (Distanciel - Cyril)</h2>
+                
+                <h3>💡 Questions Fréquentes des Ateliers</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q: Comment gérer quelqu'un qui parle sans s'arrêter ?</div>
+                    <p>En coaching : cadre temporel ("Il nous reste 1/4h, comment veux-tu l'utiliser ?"). Peut être stratégie défense pour éviter questions gênantes. Méta-communiquer : "Je ne sais pas en quoi je peux t'aider".</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Que faire si pas envie d'écouter la personne ?</div>
+                    <p><strong>Si manque disponibilité :</strong> "J'ai l'impression que tu as besoin d'écoute, mais je ne suis pas disponible maintenant". <strong>Si personne envahissante :</strong> "Je suis désolé, je n'ai pas le temps" sans forcément proposer alternative.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Comment gérer objection sur le prix ?</div>
+                    <p>Objection cache souvent insécurité plus profonde. Reconnaître difficulté AVANT ré-argumenter : "J'entends que c'est un investissement important pour vous..." puis rassurer sur adéquation besoins.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Manager veut partage émotionnel mais moi non ?</div>
+                    <p>Pas obligé partager ses émotions si pas confiance. Stratégie : comprendre et reconnaître situation/pression du manager sans être d'accord avec comportement. Montrer qu'on entend ce qui est important pour lui.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q: Comment ramener discussion qui part dans tous sens ?</div>
+                    <p>Recentrer sur "ressenti" plutôt qu'évaluations mentales. "Qu'est-ce que tu ressens ?" au lieu de "Qu'est-ce que tu penses ?". Crée lien plus fort, montre plus grande considération.</p>
+                </div>
+
+                <h3>🎯 Retours d'Expérience Stagiaires</h3>
+                
+                <div class="example-box">
+                    <strong>Cas Olivier (Passion agriculture) :</strong> Questions ouvertes sur valeurs (travail, authenticité, sincérité). Reformulation précise avec mots exacts. Obtention "oui physiologique" : "Absolument". Sentiment d'être parfaitement compris en quelques minutes.
+                </div>
+
+                <div class="example-box">
+                    <strong>Cas Gina avec Cindy :</strong> Écoute active, reformulation, résumé final. Gina profondément touchée car Cindy pleinement présente. Défi : résister envie partager coïncidence personnelle jusqu'à fin échange.
+                </div>
+
+                <div class="example-box">
+                    <strong>Cas Flora avec Magalie :</strong> Projet incompris par famille depuis années. En 10 minutes avec écoute/reformulation : projet compris ET Flora comprend mieux ses motivations. Pouvoir de l'écoute pour avancer.
+                </div>
+
+                <h3>🛠️ Démonstrations Pratiques</h3>
+                
+                <div class="highlight-box">
+                    <p><strong>Exercice répétition exacte :</strong> A raconte, B répète mot pour mot après signal "Ce que tu me dis, c'est...". Aiguise capacité écoute, révèle vitesse perte information.</p>
+                    <p><strong>Exercice relance/reformulation :</strong> Une phrase max, reformuler toutes 2-3 phrases, résumé final avec mots exacts personne.</p>
+                    <p><strong>Jeu disputes (trinômes) :</strong> Scène habituelle puis mode boucle relationnelle. Transformer confrontation en dialogue compromis.</p>
+                </div>
+            </section>
+
+            <section id="applications" class="section">
+                <h2>🔧 Applications Pratiques</h2>
+                
+                <h3>👨‍👩‍👧‍👦 Communication Familiale</h3>
+                <div class="mode-card">
+                    <div class="mode-title">Exemple Télévision</div>
+                    <p><strong>Au lieu de :</strong> "Éteins la télé maintenant !"</p>
+                    <p><strong>Valider d'abord :</strong> "J'entends que pour toi, rester devant télé c'est top, n'est-ce pas ? Si on pouvait y rester toute soirée, ce serait génial."</p>
+                    <p><strong>Puis demander :</strong> "Et je sais que ça va être compliqué pour toi, mais je vais te demander d'éteindre maintenant pour telle raison."</p>
+                </div>
+
+                <h3>🎮 Stratégie Communication Adolescent (Écrans)</h3>
+                <div class="example-box">
+                    <p><strong>Intention clé :</strong> Écoute "gratuite" et sincère, sans intention cachée de faire arrêter</p>
+                    <p><strong>Entrer dans son monde :</strong> "C'est quoi ? Quel personnage joues-tu ?"</p>
+                    <p><strong>Découvrir valeurs :</strong> Compétence, stratégie, leadership (jeune = général 3000 personnes)</p>
+                    <p><strong>Nourrir valeurs hors jeu :</strong> Seul moyen réduire temps = satisfaire besoins ailleurs</p>
+                </div>
+
+                <h3>💼 Gestion Conflits Professionnels</h3>
+                <div class="highlight-box">
+                    <p><strong>Reproches hiérarchie :</strong> Accueillir critique → Demander exemples spécifiques → Proposer solution immédiate + long terme → RDV organisation</p>
+                    <p><strong>Machine à café/photocopieur :</strong> D'abord créer rapport positif, puis présenter problème comme découverte partagée</p>
+                    <p><strong>Médiation triangulaire :</strong> Attention Triangle Karpman (Victime/Persécuteur/Sauveteur) - Se concentrer sur intentions positives chacun</p>
+                </div>
+
+                <h3>👶 Limites Enfants Jeunes</h3>
+                <div class="warning-box">
+                    <p><strong>Moins 8 ans :</strong> Cerveau pas équipé raisonnements complexes, argumentation, compromis</p>
+                    <p><strong>Mais écoute possible :</strong> Sujet ressassé = pas assez écouté. Explorer besoin derrière demande même si irréalisable</p>
+                    <p><strong>Exemple karaté 3,5 ans :</strong> Valider passion, parler futur moment possible, acheter kimono pour reconnaissance</p>
+                </div>
+            </section>
+
+            <section id="certification" class="section section-certification">
+                <h2>🎓 Spécificités Certification ADVM</h2>
+                
+                <div class="warning-box">
+                    <p><strong>Position dans cursus :</strong> Niveau Base (fondamental pour tous niveaux suivants)</p>
+                    <p><strong>Critères évaluation :</strong> 12/20 minimum</p>
+                    <p><strong>Durée :</strong> Maîtrise techniques sans timing strict</p>
+                </div>
+
+                <h3>🎯 Points Évaluation</h3>
+                <div class="mode-grid">
+                    <div class="mode-card">
+                        <div class="mode-title">📝 Épreuve Écrite</div>
+                        <ul style="text-align: left;">
+                            <li>3 niveaux communication PNL</li>
+                            <li>Différence écoute active/passive</li>
+                            <li>10 pièges écoute (Petitcollin)</li>
+                            <li>Techniques relance/reformulation</li>
+                            <li>Nœud vs boucle relationnelle</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <div class="mode-title">🎭 Épreuve Pratique</div>
+                        <ul style="text-align: left;">
+                            <li>Démonstration écoute active</li>
+                            <li>Obtention oui physiologiques</li>
+                            <li>Usage mots exacts personne</li>
+                            <li>Gestion situation conflictuelle</li>
+                            <li>Synchronisation appropriée</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🏆 Formulations Types Certification</h3>
+                <div class="highlight-box">
+                    <p><strong>Relance :</strong> "Quand tu dis [mot exact]..." ou "[Mot] ?"</p>
+                    <p><strong>Reformulation :</strong> "Ce que tu me dis, c'est que [mots exacts personne]"</p>
+                    <p><strong>Validation :</strong> Attendre "oui physiologique" avant continuer</p>
+                    <p><strong>Synthèse :</strong> "Si je résume avec tes mots : [points clés]"</p>
+                </div>
+            </section>
+
+            <section id="pieges" class="section">
+                <h2>🚨 Pièges à Éviter</h2>
+                
+                <div class="warning-box">
+                    <h4>🔴 Erreurs Majeures</h4>
+                    <ul>
+                        <li><strong>Synonymes :</strong> "Père" au lieu "papa" = rupture lien</li>
+                        <li><strong>Conseils non sollicités :</strong> Détruit posture écoute</li>
+                        <li><strong>Multi-questions :</strong> Embrouille interlocuteur</li>
+                        <li><strong>Projection personnelle :</strong> Ramener à son expérience</li>
+                        <li><strong>Acceleration processus :</strong> "Tirer sur pousse pour grandir"</li>
+                        <li><strong>Jugement caché :</strong> Non-verbal trahit intention</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Signaux d'Alerte</h4>
+                    <ul>
+                        <li>Personne se répète en boucle → Pas assez écoutée, continuer reformuler</li>
+                        <li>Tensions physiques → Revoir synchronisation, ralentir</li>
+                        <li>Pas de oui physiologique → Reformulation inexacte</li>
+                        <li>Fermeture soudaine → Jugement perçu, revenir accueil</li>
+                        <li>Perte concentration → Vérifier disponibilité/présence</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="bonnes-pratiques" class="section">
+                <h2>✨ Bonnes Pratiques & Astuces</h2>
+                
+                <h3>🎯 Préparation Optimale</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li><strong>Vérifier prérequis :</strong> Disponibilité + présence AVANT commencer</li>
+                        <li><strong>Cadrer temps :</strong> Annoncer durée disponible</li>
+                        <li><strong>Position physique :</strong> Même hauteur, contact visuel</li>
+                        <li><strong>État interne :</strong> Curiosité sincère, intention positive</li>
+                    </ul>
+                </div>
+
+                <h3>🎭 Excellence Accompagnement</h3>
+                <div class="example-box">
+                    <p><strong>Rythme naturel :</strong> Respecter tempo personne, ne pas presser</p>
+                    <p><strong>Mots sacrés :</strong> Utiliser vocabulaire EXACT de l'autre</p>
+                    <p><strong>Silences bénéfiques :</strong> Laisser temps réflexion après relance</p>
+                    <p><strong>Feedback constant :</strong> Signaux non-verbaux attention</p>
+                </div>
+
+                <h3>🔄 Gestion Temps & Énergie</h3>
+                <div class="highlight-box">
+                    <p><strong>80% écoute :</strong> 20% intervention maximum</p>
+                    <p><strong>Reformulation fréquente :</strong> Toutes 2-3 phrases</p>
+                    <p><strong>Pauses nécessaires :</strong> Si saturation information</p>
+                    <p><strong>Clôture propre :</strong> Toujours finir par synthèse validée</p>
+                </div>
+            </section>
+
+            <section id="synthese" class="section">
+                <h2>📊 Synthèse Visuelle</h2>
+                
+                <div class="key-points">
+                    <h3>🎯 Schéma Global Communication PNL</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; margin: 1rem 0;">
+                        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                            <strong>DISPONIBILITÉ</strong> → <strong>ÉCOUTE ACTIVE</strong> → <strong>RELANCE</strong> → <strong>REFORMULATION</strong> → <strong>VALIDATION</strong> → <strong>SYNTHÈSE</strong>
+                        </p>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🧘</div>
+                                <div>Prérequis</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>👂</div>
+                                <div>Se Taire</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>❓</div>
+                                <div>Relancer</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🪞</div>
+                                <div>Reformuler</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>✅</div>
+                                <div>Valider</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>📝</div>
+                                <div>Synthèse</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-points">
+                    <h3>🎪 Boucle Relationnelle Visuelle</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <strong>1️⃣ ACCUEILLIR</strong> (Intention de l'autre)<br>
+                            ↓<br>
+                            <strong>2️⃣ SE SYNCHRONISER</strong> (Mise en phase)<br>
+                            ↓<br>
+                            <strong>3️⃣ ACCOMPAGNER/ORIENTER</strong> (Vers solution)
+                        </div>
+                        <p style="margin-top: 1rem; text-align: center; font-style: italic;">
+                            "Remplace Affirmation → Questions | Généralisation → Précision | Rejet → Accueil"
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="check-final" class="section">
+                <div class="key-points">
+                    <h2>✅ Checklist Maîtrise Finale</h2>
+                    <div class="points-grid">
+                        <div class="point-card">Je maîtrise prérequis disponibilité/présence</div>
+                        <div class="point-card">Je pratique se taire et feedback non-verbal</div>
+                        <div class="point-card">J'utilise relances précises</div>
+                        <div class="point-card">Je reformule avec mots EXACTS</div>
+                        <div class="point-card">J'obtiens oui physiologiques</div>
+                        <div class="point-card">J'évite les 10 pièges écoute</div>
+                        <div class="point-card">Je synchronise naturellement</div>
+                        <div class="point-card">Je gère nœud vs boucle relationnelle</div>
+                        <div class="point-card">J'adapte présentiel/distanciel</div>
+                        <div class="point-card">Je privilégie relation sur problème</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="autres-infos" class="section">
+                <h2>📚 Autres Informations</h2>
+                
+                <h3>📄 Position dans Cursus ADVM</h3>
+                <p><strong>Niveau :</strong> Base (fondamental pour tous protocoles suivants)</p>
+                <p><strong>Prérequis :</strong> Aucun - Premier niveau formation</p>
+                <p><strong>Suivants :</strong> Auto-ancrage, Objectif 5 points, Submodalités</p>
+
+                <h3>📞 Contacts Formation</h3>
+                <div class="example-box">
+                    <p><strong>Paul Pyronnet Institut :</strong> Formation présentiel</p>
+                    <p><strong>Cyril Godon :</strong> cyril.godon@zeolitop.com - Cercles pratique distanciel</p>
+                </div>
+
+                <h3>🧠 Références Bibliographiques</h3>
+                <div class="highlight-box">
+                    <p><strong>Richard Bandler :</strong> "Un cerveau pour changer"</p>
+                    <p><strong>Carl Rogers :</strong> Principes écoute active</p>
+                    <p><strong>Christelle Petitcollin :</strong> "Savoir écouter ça s'apprend" - 10 pièges</p>
+                    <p><strong>Triangle Karpman :</strong> Analyse transactionnelle - Victime/Persécuteur/Sauveteur</p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p><strong>Communication Écoute Active - Guide Révision Base ADVM 2025</strong></p>
+            <p>Paul Pyronnet Institut | Cyril Godon Distanciel</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                "La relation, c'est ce qui va permettre, quand elle est retrouvée, d'avancer sur le problème"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
