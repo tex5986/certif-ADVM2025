@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identification des Rêves - Base ADVM 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Bouton Retour Index */
+        .btn-retour {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-retour:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(79, 172, 254, 0.6);
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        }
+
+        .btn-retour::before {
+            content: '← ';
+            margin-right: 5px;
+        }
+
+        /* Bannière créateur */
+        .banniere-creator {
+            background: #ffffff;
+            color: #2d3748;
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid #4facfe;
+        }
+
+        .creator-info {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .creator-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .creator-disclaimer {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .btn-retour {
+                top: 15px;
+                left: 15px;
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><rect width="11" height="11" x="10" y="10" fill="url(%23a)"/><rect width="11" height="11" x="20" y="10" fill="url(%23a)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .nav-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .section-concepts { border-left-color: #4facfe; }
+        .section-exercice { border-left-color: #43e97b; }
+        .section-protocole { border-left-color: #fa709a; }
+        .section-valeurs { border-left-color: #ffcd3c; }
+        .section-vigilance { border-left-color: #ff6b6b; }
+        .section-synthese { border-left-color: #667eea; }
+        
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .exercise-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .exercise-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .step-number {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f093fb;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .key-points {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(250, 112, 154, 0.3);
+        }
+        
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .point-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            color: white !important;
+        }
+        
+        .footer strong {
+            color: white !important;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            font-weight: 500;
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: #2d3748;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            font-style: italic;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                background: white;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+
+            .btn-retour {
+                display: none;
+            }
+
+            .banniere-creator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="btn-retour" onclick="history.back()">Retour Index</a>
+
+    <div class="container">
+        <header class="header">
+            <h1>🎯 Identification des Rêves</h1>
+            <p class="subtitle">Guide de Révision - Niveau Base ADVM 2025</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Paul Pyronnet Institut | Voyage dans le temps créatif
+            </div>
+        </header>
+
+        <nav class="nav-grid">
+            <a href="#concepts" class="nav-item">🎯 Concepts Clés</a>
+            <a href="#exercice" class="nav-item">⚙️ Exercice Principal</a>
+            <a href="#projections" class="nav-item">🕰️ 3 Projections Temporelles</a>
+            <a href="#valeurs" class="nav-item">💎 Découverte des Valeurs</a>
+            <a href="#vigilance" class="nav-item">⚠️ Points de Vigilance</a>
+            <a href="#synthese" class="nav-item">📊 Synthèse Visuelle</a>
+        </nav>
+
+        <div class="content">
+            <section id="introduction" class="section">
+                <h2>📋 Introduction</h2>
+                <p><strong>Thématique globale :</strong> Exercice de créativité par voyage dans le temps pour identifier aspirations profondes et valeurs personnelles</p>
+                <p><strong>Sources intégrées :</strong></p>
+                <ul>
+                    <li>Fiches techniques exercice identification des rêves</li>
+                    <li>Accompagnement en groupe - rencontre avec son moi futur</li>
+                    <li>Feedback et retours d'expérience des participants</li>
+                    <li>Méthodologie de découverte des valeurs personnelles</li>
+                </ul>
+                <p><strong>Objectif :</strong> Créer un support unique de révision pour maîtriser l'exercice d'identification des rêves niveau Base</p>
+                
+                <div class="key-points">
+                    <h3>🌟 10 Points Clés à Retenir</h3>
+                    <div class="points-grid">
+                        <div class="point-card">🕰️ Voyage temporel : 5 ans, 3 ans, 1 an</div>
+                        <div class="point-card">📝 3 sessions d'écriture de 10 minutes</div>
+                        <div class="point-card">🚫 Aucune limite ni engagement</div>
+                        <div class="point-card">💭 État d'esprit positif obligatoire</div>
+                        <div class="point-card">🎬 Métaphore magasin de jouets</div>
+                        <div class="point-card">🔮 Rencontre avec son moi futur</div>
+                        <div class="point-card">💎 Découverte des valeurs fondamentales</div>
+                        <div class="point-card">🎯 Distinction moyens/finalité</div>
+                        <div class="point-card">📊 Cohérence quotidienne importante</div>
+                        <div class="point-card">🔄 Exercice réutilisable régulièrement</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="concepts" class="section section-concepts">
+                <h2>🎯 Concepts & Fondamentaux</h2>
+                
+                <h3>Définitions Clés</h3>
+                <div class="highlight-box">
+                    <strong>🎬 Voyage dans le temps créatif :</strong> Technique de projection mentale dans différents futurs possibles pour éveiller la créativité et découvrir ses aspirations profondes sans contraintes.
+                </div>
+                
+                <div class="example-box">
+                    <strong>🧠 Chrononautes :</strong> Terme utilisé pour désigner les participants qui deviennent des "voyageurs temporels" explorant leur propre avenir potentiel.
+                </div>
+
+                <h3>Mots Clés Techniques</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0;">
+                    <span class="badge">Projection temporelle</span>
+                    <span class="badge">Créativité intuitive</span>
+                    <span class="badge">Aspirations profondes</span>
+                    <span class="badge">Valeurs personnelles</span>
+                    <span class="badge">Vision de vie</span>
+                    <span class="badge">État ressource</span>
+                    <span class="badge">Dissociation temporelle</span>
+                    <span class="badge">Moi futur</span>
+                </div>
+
+                <h3>Principe Fondamental</h3>
+                <div class="quote-box">
+                    "Rêver sa vie pour aller chercher ce qui est derrière ses rêves et qui est important"
+                </div>
+
+                <h3>Métaphore Centrale</h3>
+                <div class="warning-box">
+                    <p><strong>🎪 Le magasin de jouets :</strong> Imaginez un enfant trois semaines avant Noël dans un Toys R Us de 3 étages. Au dernier étage "5 ans et plus", pendant 10 minutes, il peut mettre absolument tout ce qu'il veut dans le chariot sans notion de prix, de réalisme ou de limite.</p>
+                    <p><strong>État d'esprit à adopter :</strong> Liberté totale, zéro censure, pur plaisir créatif.</p>
+                </div>
+            </section>
+
+            <section id="exercice" class="section section-exercice">
+                <h2>⚙️ Exercice Principal : Le Voyage Temporel</h2>
+                
+                <h3>Structure Générale</h3>
+                <div class="exercise-step">
+                    <div class="step-number">30</div>
+                    <strong>Durée totale :</strong> 30 minutes d'exercice guidé avec musique d'ambiance
+                    <br><strong>Consigne :</strong> Ne pas parler pendant l'exercice pour rester dans sa bulle créative
+                </div>
+
+                <h3>Les 3 Règles d'Or</h3>
+                <div class="highlight-box">
+                    <ol>
+                        <li><strong>🔒 Confidentialité totale :</strong> Notes strictement personnelles, aucun partage obligatoire</li>
+                        <li><strong>🚫 Aucun engagement :</strong> Pas de promesse à tenir, exercice purement exploratoire</li>
+                        <li><strong>💪 Richesse = Qualité :</strong> Plus le contenu est riche, plus l'analyse sera profonde</li>
+                    </ol>
+                </div>
+
+                <h3>Matériel Nécessaire</h3>
+                <div class="example-box">
+                    <ul>
+                        <li>Stylo ou crayon</li>
+                        <li>Carnet avec pages dédiées (71, 73, 75)</li>
+                        <li>Environnement calme</li>
+                        <li>État d'esprit positif et ouvert</li>
+                        <li>Casque audio si nécessaire</li>
+                    </ul>
+                </div>
+
+                <h3>Conditions de Réalisation</h3>
+                <div class="warning-box">
+                    <p><strong>⚡ État d'esprit crucial :</strong> L'exercice doit être réalisé dans un état positif et agréable ("prendre son kiff")</p>
+                    <p><strong>🛑 Si déprimé :</strong> Reporter l'exercice à un moment plus favorable</p>
+                    <p><strong>🎵 Ambiance :</strong> Musique douce, voix guide, atmosphere propice à la créativité</p>
+                </div>
+            </section>
+
+            <section id="projections" class="section section-protocole">
+                <h2>🕰️ Les 3 Projections Temporelles</h2>
+                
+                <div class="timeline-grid">
+                    <div class="timeline-card">
+                        <div class="timeline-title">🎬 Projection 5+ ans</div>
+                        <p><strong>Page 71 du carnet</strong></p>
+                        <p>Vision la plus large et ambitieuse. Exploration des possibilités infinies sans aucune contrainte de réalisme, budget ou faisabilité.</p>
+                        <p><em>10 minutes d'écriture libre</em></p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🎯 Projection 3 ans</div>
+                        <p><strong>Page 73 du carnet</strong></p>
+                        <p>Tunnel spatio-temporel vers 2025. Consolidation des changements, premières étapes concrètes vers la vision.</p>
+                        <p><em>10 minutes d'écriture libre</em></p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">⚡ Projection 1 an</div>
+                        <p><strong>Page 75 du carnet</strong></p>
+                        <p>Actions immédiates et premiers pas. Ce qui peut bouger rapidement dans la vie quotidienne.</p>
+                        <p><em>10 minutes d'écriture libre</em></p>
+                    </div>
+                </div>
+
+                <h3>🔮 Rencontre avec son Moi Futur</h3>
+                
+                <div class="exercise-step">
+                    <div class="step-number">1</div>
+                    <strong>Méditation préparatoire :</strong> Connexion à son monde intérieur, expansion de conscience de l'infiniment petit à l'univers
+                </div>
+
+                <div class="exercise-step">
+                    <div class="step-number">2</div>
+                    <strong>Voyage temporel :</strong> Visualisation du déplacement vers son moi futur dans 5 ans, installation du décor et de l'environnement
+                </div>
+
+                <div class="exercise-step">
+                    <div class="step-number">3</div>
+                    <strong>Prise de contact :</strong> Ressentir l'énergie et la présence de son moi futur, noter la première impression
+                </div>
+
+                <div class="exercise-step">
+                    <div class="step-number">4</div>
+                    <strong>Interview du moi futur :</strong> Poser des questions spécifiques sur tous les domaines de vie
+                </div>
+
+                <div class="exercise-step">
+                    <div class="step-number">5</div>
+                    <strong>Transcription immédiate :</strong> Noter toutes les réponses et impressions pour ancrer l'expérience
+                </div>
+
+                <h3>Questions Clés à Poser au Moi Futur</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li><strong>🎯 Essentiel :</strong> "Qu'est-ce qui est devenu essentiel dans ta vie en 5 ans ?"</li>
+                        <li><strong>🕛 Temps :</strong> "À quoi consacres-tu le plus de temps ? Pour qui et pourquoi ?"</li>
+                        <li><strong>🏡 Environnement :</strong> "As-tu changé d'environnement ? Quels changements ont amélioré ta vie ?"</li>
+                        <li><strong>🧠 Compétences :</strong> "Sur quelles expertises t'es-tu aiguisé ? Pourquoi te sollicite-t-on ?"</li>
+                        <li><strong>👨‍👩‍👧‍👦 Relations :</strong> "Qu'est-ce qui a évolué dans tes relations familiales ?"</li>
+                        <li><strong>💡 Capacités :</strong> "De quoi te sens-tu davantage capable aujourd'hui ?"</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="valeurs" class="section section-valeurs">
+                <h2>💎 Découverte des Valeurs</h2>
+                
+                <h3>Principe Fondamental</h3>
+                <div class="quote-box">
+                    "Ne pas connaître ses valeurs, c'est un peu comme consommer des barbituriques avant d'ouvrir les cadeaux de Noël"
+                </div>
+
+                <h3>🎯 Les Valeurs : Boussole de Vie</h3>
+                <div class="highlight-box">
+                    <p><strong>Définition :</strong> Les valeurs sont les principes fondamentaux qui donnent du sens à nos choix et actions. Elles émergent naturellement de nos rêves et aspirations.</p>
+                    <p><strong>Fonction :</strong> Servent de boussole pour orienter nos décisions et maintenir la motivation au quotidien.</p>
+                </div>
+
+                <h3>🔄 Distinction Valeurs de Moyens vs Finalité</h3>
+                <div class="timeline-grid">
+                    <div class="timeline-card">
+                        <div class="timeline-title">⚙️ Valeurs de Moyens</div>
+                        <p>Ce qui permet d'agir et d'atteindre ses objectifs</p>
+                        <ul style="text-align: left;">
+                            <li>Temps</li>
+                            <li>Argent</li>
+                            <li>Santé</li>
+                            <li>Compétences</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🎯 Valeurs de Finalité</div>
+                        <p>Ce qui donne vraiment du sens à la vie</p>
+                        <ul style="text-align: left;">
+                            <li>Famille/Couple</li>
+                            <li>Contribution aux autres</li>
+                            <li>Création/Art</li>
+                            <li>Spiritualité</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🧠 Méthodologie du "Technicien"</h3>
+                <div class="example-box">
+                    <p><strong>Processus d'affinage progressif :</strong></p>
+                    <ul>
+                        <li>Étape 1 : Lister 30-50 valeurs possibles</li>
+                        <li>Étape 2 : Réduire à 15 valeurs importantes</li>
+                        <li>Étape 3 : Sélectionner les 5 valeurs fondamentales</li>
+                        <li>Étape 4 : Hiérarchiser selon l'importance personnelle</li>
+                    </ul>
+                    <p><em>"Laisser le temps au temps" pour que le processus soit efficace</em></p>
+                </div>
+
+                <h3>🏹 L'Art du Tir à l'Arc</h3>
+                <div class="quote-box">
+                    "La finalité du tir à l'arc, ce n'est pas d'atteindre la cible, c'est de répéter exactement le même geste"
+                </div>
+                <div class="warning-box">
+                    <p><strong>Leçon :</strong> Ce qui donne du bonheur, ce n'est pas ce qu'on va vivre dans 5 ans, c'est le sentiment chaque jour de faire des choses cohérentes avec son rêve.</p>
+                </div>
+            </section>
+
+            <section id="vigilance" class="section section-vigilance">
+                <h2>⚠️ Points de Vigilance</h2>
+                
+                <h3>🚫 Erreurs Fréquentes</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Auto-censure :</strong> Se limiter par le réalisme, le budget ou la faisabilité</li>
+                        <li><strong>Engagement prématuré :</strong> Considérer l'exercice comme une promesse à tenir</li>
+                        <li><strong>Mauvais état d'esprit :</strong> Faire l'exercice en étant déprimé ou négatif</li>
+                        <li><strong>Précipitation :</strong> Vouloir analyser pendant l'exercice au lieu de laisser couler</li>
+                        <li><strong>Partage forcé :</strong> Se sentir obligé de partager ses notes personnelles</li>
+                    </ul>
+                </div>
+
+                <h3>🔧 Solutions aux Blocages</h3>
+                <div class="example-box">
+                    <p><strong>Si difficulté à ouvrir le champ des possibles :</strong> Imaginer avoir reçu 2-3 millions d'euros pour se libérer des contraintes financières</p>
+                    <p><strong>Si projection difficile :</strong> Commencer par la vision 5+ ans qui est souvent plus riche que celle à 1 an</p>
+                    <p><strong>Si état dépressif :</strong> Arrêter immédiatement l'exercice et le reporter à un meilleur moment</p>
+                </div>
+
+                <h3>📊 Observations Courantes</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li>Plus d'idées émergent généralement à 5 ans qu'à 1 an</li>
+                        <li>Les blocages passés influencent la vision à court terme</li>
+                        <li>Les mêmes rêves ressortent souvent après 10 ans</li>
+                        <li>Un fil conducteur apparaît dans les aspirations</li>
+                        <li>Les valeurs identifiées dans les rêves correspondent à celles de la vie réelle</li>
+                    </ul>
+                </div>
+
+                <h3>⚖️ Cadre Éthique</h3>
+                <div class="warning-box">
+                    <p><strong>Usage approprié :</strong> Exercice de développement personnel, pas de thérapie</p>
+                    <p><strong>Respect du rythme :</strong> Ne pas forcer si la personne n'est pas réceptive</p>
+                    <p><strong>Bienveillance :</strong> Accompagner sans jugement les découvertes personnelles</p>
+                </div>
+            </section>
+
+            <section id="application" class="section">
+                <h2>🎪 Applications Pratiques</h2>
+                
+                <h3>🔄 Réutilisation de l'Exercice</h3>
+                <div class="example-box">
+                    <p><strong>Fréquence recommandée :</strong> Exercice à refaire régulièrement pour observer l'évolution</p>
+                    <p><strong>Applications spécialisées :</strong></p>
+                    <ul>
+                        <li>Domaine personnel (vie privée, loisirs)</li>
+                        <li>Domaine professionnel (carrière, projets)</li>
+                        <li>Domaine social (relations, communauté)</li>
+                        <li>Domaine financier (indépendance, investissements)</li>
+                        <li>Domaine spirituel (sens, contribution)</li>
+                    </ul>
+                </div>
+
+                <h3>🌟 Exercice de l'Ange Gardien</h3>
+                <div class="exercise-step">
+                    <div class="step-number">👼</div>
+                    <strong>Méga-dissociation :</strong> Se positionner comme son propre ange gardien observant sa vie depuis un "balcon au paradis"
+                    <br><strong>Objectif :</strong> Prendre distance pour identifier avec clarté les 5 dimensions les plus essentielles
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>Processus :</strong></p>
+                    <ul>
+                        <li>Debout, yeux fermés, connexion à la version gardienne de soi</li>
+                        <li>Réception par "fax" imaginaire de la liste des rêves terrestres</li>
+                        <li>Identification progressive des 5 dimensions fondamentales</li>
+                        <li>Engagement fort à honorer ces dimensions dans sa vie</li>
+                        <li>Utilisation respiration et visualisation pour faciliter le processus</li>
+                    </ul>
+                </div>
+
+                <h3>🧠 Intégration Énergétique</h3>
+                <div class="quote-box">
+                    "Nous sommes faits de particules d'information et d'énergie"
+                </div>
+                <div class="example-box">
+                    <p><strong>Méditation d'intégration :</strong></p>
+                    <ul>
+                        <li>Fermer les yeux, retrouver sa verticalité</li>
+                        <li>Remercier son "intelligence intérieure"</li>
+                        <li>Visualiser les informations comme particules tournantes</li>
+                        <li>Synchronisation avec son être profond, cœur et âme</li>
+                        <li>Intégration dans son "empreinte énergétique"</li>
+                        <li>Lâcher-prise pour laisser "le mystère de la vie" opérer</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="temoignages" class="section">
+                <h2>💬 Témoignages & Retours d'Expérience</h2>
+                
+                <h3>📈 Observations Récurrentes</h3>
+                <div class="timeline-grid">
+                    <div class="timeline-card">
+                        <div class="timeline-title">🔄 Récurrence des Rêves</div>
+                        <p>Après 10 ans, constat de récurrence des mêmes aspirations profondes, confirmant la validité de l'exercice</p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🚀 Accélérations Soudaines</div>
+                        <p>Liens observés entre blocages passés et accélérations soudaines dans la réalisation des objectifs</p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🧵 Fil Conducteur</div>
+                        <p>Identification d'un fil conducteur cohérent dans toutes les aspirations exprimées</p>
+                    </div>
+                </div>
+
+                <h3>🌟 Cas de Transformation</h3>
+                <div class="example-box">
+                    <p><strong>Exemple Geoffrey :</strong> Ancien policier avec épouse enseignante, 2 enfants, maison à payer. Grâce à l'alignement PNL sur ses valeurs en 3,5-4 ans, transformation professionnelle et personnelle inattendue.</p>
+                    <p><strong>Facteurs clés :</strong> Alignement valeurs, motivation discipline, dépassement obstacles matériels</p>
+                </div>
+
+                <h3>🎯 Leçons Apprises</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Projection facilitée :</strong> Vision 5+ ans souvent plus riche que vision 1 an</li>
+                        <li><strong>Créativité variable :</strong> Accepter que l'imagination varie selon l'horizon temporel</li>
+                        <li><strong>Blocages révélateurs :</strong> Difficultés de projection révèlent des croyances limitantes</li>
+                        <li><strong>Cohérence motivante :</strong> Sentiment quotidien de cohérence plus important que résultat final</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="lien-pnl" class="section">
+                <h2>🔗 Liens avec les Fondamentaux PNL</h2>
+                
+                <h3>📊 Le Plan de Vol PNL</h3>
+                <div class="highlight-box">
+                    <p><strong>Modèle triangle :</strong></p>
+                    <ul>
+                        <li><strong>Centre :</strong> Perceptions/Valeurs/Identité</li>
+                        <li><strong>Haut :</strong> Objectif (rêves, vision)</li>
+                        <li><strong>Bas :</strong> Énergie intérieure</li>
+                    </ul>
+                </div>
+
+                <h3>🛠️ Les 5 Placards d'Outils PNL</h3>
+                <div class="timeline-grid">
+                    <div class="timeline-card">
+                        <div class="timeline-title">⚖️ Alignement</div>
+                        <p>Valeurs/Vision</p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🧠 États Internes</div>
+                        <p>Gestion émotionnelle</p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🤝 Relations</div>
+                        <p>Communication</p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🧩 Potentiel</div>
+                        <p>Capacités cerveau</p>
+                    </div>
+                    
+                    <div class="timeline-card">
+                        <div class="timeline-title">🔄 Intégration</div>
+                        <p>Processus changement</p>
+                    </div>
+                </div>
+
+                <h3>🎯 Objectif en 5 Points</h3>
+                <div class="exercise-step">
+                    <div class="step-number">a</div>
+                    <strong>Visualisation :</strong> Se représenter la situation désirée au meilleur de soi-même (voir, entendre, ressentir)
+                </div>
+                
+                <div class="exercise-step">
+                    <div class="step-number">b</div>
+                    <strong>Valeurs personnelles :</strong> Identifier les valeurs que la réalisation nourrit pour soi
+                </div>
+                
+                <div class="exercise-step">
+                    <div class="step-number">c</div>
+                    <strong>Valeurs environnement :</strong> Se mettre à la place des personnes impactées positivement
+                </div>
+                
+                <div class="exercise-step">
+                    <div class="step-number">d</div>
+                    <strong>Comportements :</strong> Identifier nouveaux comportements spécifiques émergents
+                </div>
+                
+                <div class="exercise-step">
+                    <div class="step-number">e</div>
+                    <strong>Intégration :</strong> "Sauter" dans l'expérience réalisée pour renforcer motivation et vision
+                </div>
+            </section>
+
+            <section id="synthese" class="section section-synthese">
+                <h2>📊 Synthèse Visuelle</h2>
+                
+                <div class="key-points">
+                    <h3>🎯 Schéma Global de l'Exercice</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; margin: 1rem 0;">
+                        <p style="font-size: 1.1rem; margin-bottom: 1rem; text-align: center;">
+                            <strong>PRÉPARATION</strong> → <strong>VOYAGE 5 ANS</strong> → <strong>VOYAGE 3 ANS</strong> → <strong>VOYAGE 1 AN</strong> → <strong>VALEURS</strong> → <strong>INTÉGRATION</strong>
+                        </p>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🧘</div>
+                                <div>État Positif</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🎬</div>
+                                <div>Projection 5+</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🎯</div>
+                                <div>Projection 3</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>⚡</div>
+                                <div>Projection 1</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>💎</div>
+                                <div>Valeurs</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🔄</div>
+                                <div>Ancrage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-points">
+                    <h3>🕰️ Timeline Temporelle</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <strong>PRÉSENT</strong><br>
+                            ↓ Voyage mental ↓<br>
+                            <strong>+1 AN</strong> (Actions immédiates)<br>
+                            ↓<br>
+                            <strong>+3 ANS</strong> (Consolidation)<br>
+                            ↓<br>
+                            <strong>+5 ANS</strong> (Vision large)<br>
+                            ↓<br>
+                            <strong>VALEURS ÉTERNELLES</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="check-final" class="section">
+                <div class="key-points">
+                    <h2>✅ Checklist Maîtrise Niveau Base</h2>
+                    <div class="points-grid">
+                        <div class="point-card">Je comprends le principe du voyage temporel</div>
+                        <div class="point-card">Je maîtrise les 3 règles d'or</div>
+                        <div class="point-card">Je sais créer l'état d'esprit approprié</div>
+                        <div class="point-card">Je guide les 3 projections temporelles</div>
+                        <div class="point-card">J'utilise la métaphore du magasin</div>
+                        <div class="point-card">Je facilite la rencontre moi futur</div>
+                        <div class="point-card">J'aide à découvrir les valeurs</div>
+                        <div class="point-card">Je différencie moyens/finalité</div>
+                        <div class="point-card">Je guide l'intégration énergétique</div>
+                        <div class="point-card">Je respecte le cadre éthique</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="autres-infos" class="section">
+                <h2>📚 Autres Informations</h2>
+                
+                <h3>🎓 Position dans le Cursus ADVM</h3>
+                <p><strong>Niveau :</strong> Base - Exercice fondamental de découverte de soi</p>
+                <p><strong>Prérequis :</strong> Aucun, accessible à tous</p>
+                <p><strong>Suites :</strong> Travail valeurs niveau Technicien, objectifs niveau Praticien</p>
+
+                <h3>📞 Ressources Complémentaires</h3>
+                <div class="example-box">
+                    <p><strong>Paul Pyronnet Institut :</strong> Formation complète développement personnel</p>
+                    <p><strong>Support :</strong> Carnet dédié avec pages numérotées spécifiques</p>
+                    <p><strong>Accompagnement :</strong> Possibilité sessions individuelles pour approfondir</p>
+                </div>
+
+                <h3>🔬 Fondements Scientifiques</h3>
+                <div class="highlight-box">
+                    <p><strong>Neuroplasticité :</strong> Exercice stimule nouvelles connexions neuronales</p>
+                    <p><strong>Psychologie positive :</strong> Focus sur potentiels et ressources</p>
+                    <p><strong>Créativité :</strong> Activation cerveau droit par visualisation</p>
+                    <p><strong>Motivation :</strong> Connexion émotionnelle aux objectifs</p>
+                </div>
+
+                <h3>🌍 Applications Diverses</h3>
+                <div class="warning-box">
+                    <p><strong>Développement personnel :</strong> Clarification projet de vie</p>
+                    <p><strong>Coaching :</strong> Outil puissant découverte aspirations client</p>
+                    <p><strong>Formation :</strong> Exercice utilisable dans cursus variés</p>
+                    <p><strong>Thérapie :</strong> Complément approches orientées solution</p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p style="color: white;"><strong>Identification des Rêves - Guide Révision Base ADVM 2025</strong></p>
+            <p>Paul Pyronnet Institut | Voyage Créatif dans le Temps</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                "Rêver sa vie pour découvrir ce qui est vraiment important"
+            </p>
+        </footer>
+    </div>
+
+    <!-- BANNIÈRE CRÉATEUR -->
+    <div class="banniere-creator">
+        <div class="creator-info">
+            <h3 class="creator-title">Document créé par Alexandre DHENNIN</h3>
+            
+            <div style="text-align: center; margin: 1.5rem 0;">
+                <p style="margin-bottom: 0.5rem;"><strong>Étudiant ADVM 2025</strong> - Mise en forme professionnelle et optimisation pédagogique</p>
+                <p style="margin-bottom: 0.5rem;">Contact : advm2025off@gmail.com | Autres services sur demande</p>
+            </div>
+            
+            <div class="creator-disclaimer">
+                <p style="margin-bottom: 0.5rem;"><strong>Document créé hors cadre Paul Pyronnet Institut</strong> - Synthèse personnelle non validée officiellement</p>
+                <p style="margin-bottom: 0.5rem;">Contenus pédagogiques basés sur formations PPI - Erreurs possibles</p>
+                <p>Utilisation à des fins d'étude personnelle uniquement</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
