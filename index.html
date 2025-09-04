@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index ADVM 2025 - Guides de Révision PNL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        
+        .levels-container {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .level-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .level-base { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .level-technicien { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .level-praticien { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        
+        .level-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .level-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .protocols-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .protocol-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .protocol-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #ffffff 0%, #f1f3f4 100%);
+        }
+        
+        .protocol-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .protocol-description {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        
+        .protocol-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .navigation-help {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .navigation-help h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .help-item {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #2196f3;
+        }
+        
+        .help-item strong {
+            color: #1565c0;
+        }
+        
+        .footer-credits {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .footer-credits p {
+            color: #4a5568;
+            margin: 0.3rem 0;
+        }
+        
+        .footer-credits .author {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .disclaimer {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #718096;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .protocols-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📚 ADVM 2025</h1>
+            <p><strong>Guides de Révision PNL</strong></p>
+            <p>Certification Paul Pyronnet Institut</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem; color: #718096;">
+                Synthèses complètes des protocoles par niveau de formation
+            </p>
+        </header>
+
+        <nav class="navigation-help">
+            <h3>🧭 Comment naviguer</h3>
+            <div class="help-grid">
+                <div class="help-item">
+                    <strong>Navigation :</strong> Cliquez sur un protocole pour l'ouvrir. Utilisez le bouton retour de votre navigateur ou le lien "Retour Index" dans chaque page.
+                </div>
+                <div class="help-item">
+                    <strong>Compatibilité :</strong> Optimisé pour téléphone, tablette et ordinateur. Fonctionne hors ligne une fois téléchargé.
+                </div>
+                <div class="help-item">
+                    <strong>Impression :</strong> Ctrl+P sur chaque page pour imprimer en PDF. Paramètres : A4, Portrait, Marges standard.
+                </div>
+                <div class="help-item">
+                    <strong>Organisation :</strong> Les protocoles sont classés par niveau de difficulté croissante selon le programme ADVM.
+                </div>
+            </div>
+        </nav>
+
+        <div class="levels-container">
+            <!-- NIVEAU BASE -->
+            <div class="level-section">
+                <div class="level-header level-base">
+                    <div class="level-title">🌱 Niveau Base</div>
+                    <div class="level-badge">Fondamentaux PNL</div>
+                </div>
+                <div class="protocols-grid">
+                    <div class="protocol-card">
+                        <div class="protocol-title">Objectif en 5 Points</div>
+                        <div class="protocol-description">Structuration d'objectifs avec visualisation et ancrage motivationnel</div>
+                        <a href="objectif_5_points_base.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Auto-ancrage</div>
+                        <div class="protocol-description">Techniques d'ancrage personnel pour accéder à ses ressources</div>
+                        <a href="auto_ancrage_base.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Préparation Mentale</div>
+                        <div class="protocol-description">Optimisation de l'état psychologique pour événements futurs</div>
+                        <a href="preparation_mentale_base.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Brouillage</div>
+                        <div class="protocol-description">Neutralisation d'images mentales parasites</div>
+                        <a href="brouillage_base.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Désactivation d'Ancre</div>
+                        <div class="protocol-description">Suppression d'automatismes comportementaux indésirables</div>
+                        <a href="desactivation_ancre_base.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NIVEAU TECHNICIEN -->
+            <div class="level-section">
+                <div class="level-header level-technicien">
+                    <div class="level-title">⚙️ Niveau Technicien</div>
+                    <div class="level-badge">Protocoles Intermédiaires</div>
+                </div>
+                <div class="protocols-grid">
+                    <div class="protocol-card">
+                        <div class="protocol-title">Valeurs avec Intégration</div>
+                        <div class="protocol-description">Identification et hiérarchisation des valeurs personnelles</div>
+                        <a href="valeurs_integration_technicien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Chemin de Vie</div>
+                        <div class="protocol-description">Exploration et réorientation du parcours de vie</div>
+                        <a href="chemin_vie_technicien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Recadrage en 6 Points</div>
+                        <div class="protocol-description">Transformation des comportements par négociation interne</div>
+                        <a href="recadrage_6_points_technicien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Switch</div>
+                        <div class="protocol-description">Remplacement rapide d'états internes indésirables</div>
+                        <a href="switch_technicien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Dissociation Simple</div>
+                        <div class="protocol-description">Neutralisation émotionnelle par dissociation V/K</div>
+                        <a href="dissociation_simple_technicien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Changement Mental de Croyances</div>
+                        <div class="protocol-description">Modification des systèmes de croyances limitantes</div>
+                        <a href="changement_croyances_technicien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NIVEAU PRATICIEN -->
+            <div class="level-section">
+                <div class="level-header level-praticien">
+                    <div class="level-title">🎓 Niveau Praticien</div>
+                    <div class="level-badge">Protocoles Avancés</div>
+                </div>
+                <div class="protocols-grid">
+                    <div class="protocol-card">
+                        <div class="protocol-title">Marelle des Croyances ⭐</div>
+                        <div class="protocol-description">Protocole long - Transformation profonde des systèmes de croyances</div>
+                        <a href="marelle_croyances_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Négociation des Parties</div>
+                        <div class="protocol-description">Résolution des conflits internes entre différentes parties de soi</div>
+                        <a href="negociation_parties_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Changement d'Histoire de Vie ⭐</div>
+                        <div class="protocol-description">Protocole long - Réécriture thérapeutique du passé</div>
+                        <a href="changement_histoire_vie_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Dissociation Double ⭐</div>
+                        <div class="protocol-description">Protocole long - Traitement des traumatismes lourds</div>
+                        <a href="dissociation_double_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Généralités Praticien</div>
+                        <div class="protocol-description">Concepts experts et maîtrise niveau praticien</div>
+                        <a href="generalites_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Développer la Motivation</div>
+                        <div class="protocol-description">Techniques avancées de motivation et d'engagement</div>
+                        <a href="developper_motivation_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Cercle Développement Collaboratif</div>
+                        <div class="protocol-description">Méthodes de travail en groupe et supervision</div>
+                        <a href="cercle_developpement_collaboratif_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Alerte Émotionnelle et Traitement Croyance</div>
+                        <div class="protocol-description">Gestion des crises et intervention thérapeutique</div>
+                        <a href="alerte_emotionnelle_et_traitement_croyance_pnl_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Système Valeurs - Histoire Personnelle</div>
+                        <div class="protocol-description">Intégration biographique des valeurs fondamentales</div>
+                        <a href="systeme_valeurs_histoire_personnelle_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Questions Puissantes Hypnose</div>
+                        <div class="protocol-description">Techniques de questionnement et états modifiés</div>
+                        <a href="questions_puissantes_hypnose_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                    <div class="protocol-card">
+                        <div class="protocol-title">Schémas Protocoles Généralités</div>
+                        <div class="protocol-description">Vue d'ensemble et intégration des protocoles</div>
+                        <a href="pnl_schemas_des_protocoles_généralités_praticien.html" class="protocol-link">Consulter le guide</a>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 193, 7, 0.1); border-radius: 8px; border-left: 4px solid #ffc107;">
+                    <strong>⭐ Protocoles Longs :</strong> Nécessitent des adaptations spéciales pour la certification (20 minutes maximum)
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-credits">
+            <p class="author">Alexandre DHENNIN - Étudiant ADVM 2025</p>
+            <p>Mise en forme professionnelle & optimisation pédagogique</p>
+            <p>Contact : advm2025off@gmail.com | Autres services sur demande</p>
+            <div class="disclaimer">
+                Documents créés hors cadre Paul Pyronnet Institut - Synthèses personnelles non validées<br>
+                Contenus pédagogiques basés sur formations PPI - Erreurs possibles
+            </div>
+        </div>
+    </div>
+</body>
+</html>
