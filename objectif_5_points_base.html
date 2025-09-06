@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objectif en 5 Points - Base ADVM 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        /* Bouton retour index */
+        .back-to-index {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-to-index:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .back-to-index::before {
+            content: "←";
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><rect width="11" height="11" x="10" y="10" fill="url(%23a)"/><rect width="11" height="11" x="20" y="10" fill="url(%23a)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .nav-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .section-concepts { border-left-color: #4facfe; }
+        .section-protocole { border-left-color: #43e97b; }
+        .section-etapes { border-left-color: #fa709a; }
+        .section-techniques { border-left-color: #ffcd3c; }
+        .section-vigilance { border-left-color: #ff6b6b; }
+        .section-ateliers { border-left-color: #a8edea; }
+        .section-synthese { border-left-color: #667eea; }
+        
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .protocol-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .step-number {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f093fb;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .step-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .key-points {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(250, 112, 154, 0.3);
+        }
+        
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .point-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            color: white !important;
+        }
+        
+        .footer strong {
+            color: white !important;
+        }
+        
+        /* Bannière Alexandre DHENNIN */
+        .author-banner {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            border-top: 4px solid #667eea;
+        }
+        
+        .author-banner h3 {
+            color: #4facfe;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .author-banner p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+            color: white !important;
+        }
+        
+        .author-banner strong {
+            color: white !important;
+            font-weight: 700 !important;
+        }
+        
+        .author-banner .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .author-banner .disclaimer {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            font-weight: 500;
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: #2d3748;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            font-style: italic;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .back-to-index {
+                top: 10px;
+                left: 10px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .header {
+                margin-top: 50px;
+                padding: 2rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .author-banner {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                background: white;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+            
+            .back-to-index {
+                display: none;
+            }
+            
+            .author-banner {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-index">Retour Index</a>
+    
+    <div class="container">
+        <header class="header">
+            <h1>🎯 Objectif en 5 Points</h1>
+            <p class="subtitle">Guide de Révision - Niveau Base ADVM 2025</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Paul Pyronnet Institut | Protocole de motivation et lutte contre la procrastination
+            </div>
+        </header>
+
+        <nav class="nav-grid">
+            <a href="#concepts" class="nav-item">🎯 Concepts Clés</a>
+            <a href="#protocole" class="nav-item">⚙️ Protocole Détaillé</a>
+            <a href="#etapes" class="nav-item">📋 5 Étapes Essentielles</a>
+            <a href="#techniques" class="nav-item">🛠️ Techniques Avancées</a>
+            <a href="#vigilance" class="nav-item">⚠️ Points de Vigilance</a>
+            <a href="#ateliers" class="nav-item">🎪 Retours d'Ateliers</a>
+            <a href="#synthese" class="nav-item">📊 Synthèse Visuelle</a>
+        </nav>
+
+        <div class="content">
+            <section id="introduction" class="section">
+                <h2>📋 Introduction</h2>
+                <p><strong>Thématique globale :</strong> Protocole PNL de motivation pour concrétiser les objectifs et lutter contre la procrastination par visualisation future et connexion aux valeurs</p>
+                <p><strong>Sources intégrées :</strong></p>
+                <ul>
+                    <li>Ateliers pratiques Cyril Godon (Base)</li>
+                    <li>Présentation théorique du protocole</li>
+                    <li>Démonstrations en situation réelle</li>
+                    <li>Feedback et retours d'expérience des participants</li>
+                    <li>Règles techniques et organisation des ateliers Zoom</li>
+                </ul>
+                <p><strong>Objectif :</strong> Créer un support unique de révision pour maîtriser le protocole "Objectif en 5 points" niveau Base</p>
+                
+                <div class="key-points">
+                    <h3>🌟 10 Points Clés à Retenir</h3>
+                    <div class="points-grid">
+                        <div class="point-card">🎯 Projection dans futur où objectif atteint</div>
+                        <div class="point-card">👁️ Visualisation dissociée puis associée</div>
+                        <div class="point-card">💎 Connexion aux valeurs personnelles</div>
+                        <div class="point-card">🤝 Création d'alliances avec environnement</div>
+                        <div class="point-card">⚡ Micro-comportements à fort impact</div>
+                        <div class="point-card">🎨 Ancrage énergétique par couleur</div>
+                        <div class="point-card">🚫 Formulation positive obligatoire</div>
+                        <div class="point-card">📝 Contexte précis indispensable</div>
+                        <div class="point-card">🔄 Premier petit pas actionnable</div>
+                        <div class="point-card">💪 Lutte efficace contre procrastination</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="concepts" class="section section-concepts">
+                <h2>🎯 Concepts & Fondamentaux</h2>
+                
+                <h3>Définition du Protocole</h3>
+                <div class="highlight-box">
+                    <strong>🎬 Objectif en 5 points :</strong> Technique PNL conçue pour les débutants, très puissante pour trouver de la motivation et obtenir une vision plus concrète d'un projet en se projetant dans le futur où l'objectif est déjà réalisé.
+                </div>
+                
+                <div class="example-box">
+                    <strong>🧱 Principe "briques Lego" :</strong> Les protocoles PNL sont comme des briques de Lego - les mêmes techniques sont assemblées différemment pour atteindre des résultats variés.
+                </div>
+
+                <h3>Indications d'Usage</h3>
+                <div class="warning-box">
+                    <p><strong>Parfaitement adapté pour :</strong></p>
+                    <ul>
+                        <li><strong>Procrastination :</strong> "J'ai envie mais...", "C'est important mais je repousse"</li>
+                        <li><strong>Blocages kinesthésiques :</strong> Sentiment de lourdeur, énergie basse</li>
+                        <li><strong>Projets flous :</strong> Manque de concrétisation ou de netteté</li>
+                        <li><strong>Maintien d'effort :</strong> Projets nécessitant plusieurs étapes dans le temps</li>
+                    </ul>
+                </div>
+
+                <h3>Mots Clés Techniques</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0;">
+                    <span class="badge">Visualisation future</span>
+                    <span class="badge">Dissociation/Association</span>
+                    <span class="badge">Micro-comportements</span>
+                    <span class="badge">Valeurs motivantes</span>
+                    <span class="badge">Alliances</span>
+                    <span class="badge">Ancrage émotionnel</span>
+                    <span class="badge">Changement perspective</span>
+                    <span class="badge">Premier petit pas</span>
+                </div>
+
+                <h3>Citations Inspirantes</h3>
+                <div class="quote-box">
+                    "Il n'y a pas de procrastinateur, il y a que des personnes qui essayent de faire des choses qui ne sont pas importantes pour elles" - John de Martinique
+                </div>
+                
+                <div class="quote-box">
+                    "Un micro comportement c'est un comportement qui est facile à faire et qui rapporte beaucoup" - Cyril
+                </div>
+            </section>
+
+            <section id="protocole" class="section section-protocole">
+                <h2>⚙️ Protocole Détaillé</h2>
+                
+                <h3>Principe de Base</h3>
+                <div class="highlight-box">
+                    <p><strong>🕐 Changement de perspective temporelle :</strong> Passer du "comment je vais faire" (source de stress) au "comment j'ai fait" (source de solutions) en voyageant mentalement dans le futur.</p>
+                    <p><strong>🎯 Objectif :</strong> Si l'on considère l'objectif comme déjà atteint, il devient possible, et l'on peut alors se demander comment on y est arrivé.</p>
+                </div>
+
+                <h3>Conditions Préalables</h3>
+                <div class="protocol-step">
+                    <div class="step-number">✓</div>
+                    <strong>Formulation positive :</strong> Objectif sans négation ("discuter calmement" plutôt que "ne plus crier")
+                    <br><strong>Contrôle personnel :</strong> Doit dépendre uniquement de soi
+                    <br><strong>Contexte précis :</strong> Quoi, quand, où, avec qui clairement définis
+                    <br><strong>Preuves observables :</strong> Indicateurs concrets de réussite identifiables
+                </div>
+
+                <h3>Matériel et Organisation</h3>
+                <div class="example-box">
+                    <ul>
+                        <li><strong>Durée :</strong> 30 minutes environ en binôme</li>
+                        <li><strong>Support :</strong> Fiche protocole pour débutants</li>
+                        <li><strong>Posture :</strong> Accompagnant à droite pour visualisation futur</li>
+                        <li><strong>Prise de notes :</strong> Minimale (prénoms + mots-clés valeurs)</li>
+                        <li><strong>Relation :</strong> Prime toujours sur le processus strict</li>
+                    </ul>
+                </div>
+
+                <h3>Structure Générale</h3>
+                <div class="warning-box">
+                    <p><strong>⚡ Robustesse PNL :</strong> Même en cas d'oubli partiel d'une étape, la robustesse de la PNL permet d'obtenir des résultats significatifs.</p>
+                    <p><strong>🎯 Première étape cruciale :</strong> La visualisation du résultat conditionne le succès des autres étapes.</p>
+                </div>
+            </section>
+
+            <section id="etapes" class="section section-etapes">
+                <h2>📋 Les 5 Étapes Essentielles</h2>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-title">1️⃣ Scène-Preuve</div>
+                        <p><strong>Visualisation dissociée</strong></p>
+                        <p>Se voir de l'extérieur dans une scène où l'objectif est déjà atteint. Décrire ce qu'on voit et entend, pas ce qu'on ressent.</p>
+                        <p><em>"Visualise une scène qui est la preuve que tu as atteint ton objectif"</em></p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">2️⃣ Valeurs Nourries</div>
+                        <p><strong>Motivation interne</strong></p>
+                        <p>Identifier les valeurs personnelles satisfaites par l'atteinte de l'objectif. Questionner 3 niveaux pour accéder aux valeurs profondes.</p>
+                        <p><em>"Qu'est-ce que ça nourrit d'important pour toi ?"</em></p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">3️⃣ Alliances</div>
+                        <p><strong>Motivation externe</strong></p>
+                        <p>Identifier bénéficiaires et sponsors. Se mettre à leur place pour ressentir l'impact positif du succès.</p>
+                        <p><em>"Qui va bénéficier de ça ?"</em></p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">4️⃣ Micro-Comportements</div>
+                        <p><strong>Actions concrètes</strong></p>
+                        <p>3 comportements observables adoptés quand on est "au top" + le premier petit pas pour démarrer.</p>
+                        <p><em>"Comment as-tu fait ? Quel premier petit pas ?"</em></p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">5️⃣ Ancrage Émotionnel</div>
+                        <p><strong>Récompense énergétique</strong></p>
+                        <p>S'associer à la scène (fermer les yeux, "rentrer dedans") pour ressentir pleinement les émotions positives.</p>
+                        <p><em>Le "shoot émotionnel" qui ancre la motivation</em></p>
+                    </div>
+                </div>
+
+                <h3>🔄 Dissociation vs Association</h3>
+                <div class="highlight-box">
+                    <p><strong>👁️ Position Observateur (Dissocié) :</strong> Vision externe, accès limité à voir/entendre, pas de ressenti interne. Utilisé étapes 1-4.</p>
+                    <p><strong>🎭 Position Acteur (Associé) :</strong> Immersion complète dans le corps futur, accès aux ressentis émotionnels. Utilisé étape 5.</p>
+                    <p><strong>🎬 Métaphore cinéma :</strong> Comme spectateur qui décrit l'attaque du requin mais ne ressent pas la douleur de la victime.</p>
+                </div>
+            </section>
+
+            <section id="techniques" class="section section-techniques">
+                <h2>🛠️ Techniques Avancées</h2>
+                
+                <h3>🎨 Visualisation et Métaphores</h3>
+                <div class="protocol-step">
+                    <div class="step-number">🎭</div>
+                    <strong>Cadres symboliques :</strong> Théâtre, cinéma, hublot temporel - adapter aux préférences
+                    <br><strong>Description VAK :</strong> Visuel et Auditif uniquement en dissociation
+                    <br><strong>Preuves concrètes :</strong> Éléments tangibles validant la réussite
+                </div>
+
+                <h3>💎 Hiérarchie des Valeurs (3 Niveaux)</h3>
+                <div class="example-box">
+                    <p><strong>Niveau 1 :</strong> Valeur consciente directement citée (ex: courage, satisfaction)</p>
+                    <p><strong>Niveau 2 :</strong> "Quand tu es dans X, ça te permet d'accéder à quoi ?"</p>
+                    <p><strong>Niveau 3 :</strong> Valeur motrice profonde, souvent moins consciente</p>
+                    <p><em>Les valeurs à 2-3 niveaux ont un pouvoir motivationnel plus fort</em></p>
+                </div>
+
+                <h3>🤝 Technique de l'Alliance</h3>
+                <div class="warning-box">
+                    <p><strong>📍 Changement de perspective :</strong> Se mettre dans la peau du bénéficiaire</p>
+                    <ul>
+                        <li>Observer d'abord la réaction de la personne de l'extérieur</li>
+                        <li>S'assurer que le point de vue est aidant</li>
+                        <li>"Entrer" dans la personne : voir avec ses yeux, ressentir ses émotions</li>
+                        <li>Recevoir le message puis revenir à soi pour l'intégrer</li>
+                        <li>Effet souvent très puissant ("effet waouh")</li>
+                    </ul>
+                </div>
+
+                <h3>⚡ Micro-Comportements Efficaces</h3>
+                <div class="highlight-box">
+                    <p><strong>Critères d'un bon micro-comportement :</strong></p>
+                    <ul>
+                        <li><strong>Facilité :</strong> Action minimale, facile à réaliser</li>
+                        <li><strong>Impact :</strong> Effet significatif pour démarrer le projet</li>
+                        <li><strong>Coût nul :</strong> Aucun risque, aucun effort excessif</li>
+                        <li><strong>Déclencheur :</strong> Enclenche la dynamique globale</li>
+                    </ul>
+                    <p><strong>Exemples :</strong> Enregistrer un numéro de téléphone, prendre 5 min pour saluer chaque membre de l'équipe, trouver 5 min de qualité avec son enfant</p>
+                </div>
+
+                <h3>🎨 Ancrage Énergétique</h3>
+                <div class="protocol-step">
+                    <div class="step-number">🌈</div>
+                    <strong>Localisation :</strong> Identifier précisément l'émotion dans le corps
+                    <br><strong>Couleur :</strong> Associer une couleur spontanée à la sensation
+                    <br><strong>Respiration :</strong> Inspirer pour "gonfler" l'espace, expirer pour diffuser
+                    <br><strong>Extension :</strong> Faire rayonner jusqu'aux extrémités du corps
+                </div>
+            </section>
+
+            <section id="vigilance" class="section section-vigilance">
+                <h2>⚠️ Points de Vigilance</h2>
+                
+                <h3>🚫 Erreurs Fréquentes</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Objectif flou :</strong> "Améliorer confiance en soi" → Préciser contexte exact</li>
+                        <li><strong>Lecture robotique :</strong> Suivre script sans créer relation humaine</li>
+                        <li><strong>Mauvaise position :</strong> Demander ressentis en position observateur</li>
+                        <li><strong>Réponse à la place :</strong> Ne pas laisser la personne trouver ses mots</li>
+                        <li><strong>Manque de mandat :</strong> Accompagner sans demande explicite d'aide</li>
+                    </ul>
+                </div>
+
+                <h3>🔧 Gestion des Blocages</h3>
+                <div class="example-box">
+                    <p><strong>Si pas de visualisation :</strong> Proposer représentation symbolique (couleur, son, sensation)</p>
+                    <p><strong>Si doute possibilité :</strong> Revenir aux croyances limitantes avant continuer</p>
+                    <p><strong>Si blocage émotionnel :</strong> Suspendre association, revenir position observateur</p>
+                    <p><strong>Si réponse inadaptée :</strong> 80-90% du temps = mauvaise question posée</p>
+                </div>
+
+                <h3>🎯 Principe Fondamental PNL</h3>
+                <div class="quote-box">
+                    "Il n'y a pas d'échec, il n'y a que des apprentissages"
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Approche constructive :</strong> Tout résultat est information utile pour ajustement</p>
+                    <p><strong>Intention positive :</strong> Derrière chaque comportement se cache une intention positive</p>
+                    <p><strong>Questionnologie :</strong> Adapter les questions au modèle du monde de la personne</p>
+                </div>
+
+                <h3>📝 Conditions Indispensables pour Pratiquer</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Matériel :</strong> Caméra allumée, son de bonne qualité</li>
+                        <li><strong>Environnement :</strong> Calme, sans distractions (TV, enfants, chien)</li>
+                        <li><strong>État d'esprit :</strong> Bienveillance envers soi et partenaire</li>
+                        <li><strong>Mandat :</strong> Demande explicite d'aide avant tout accompagnement</li>
+                        <li><strong>Confidentialité :</strong> Respect total du contenu partagé</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ateliers" class="section section-ateliers">
+                <h2>🎪 Retours d'Ateliers & Exemples Concrets</h2>
+                
+                <h3>📋 Organisation des Ateliers (Cyril)</h3>
+                <div class="example-box">
+                    <p><strong>Format :</strong> 42 ateliers jusqu'à mi-juillet (4 Base + 9 Technicien + 8 Praticien)</p>
+                    <p><strong>Horaires :</strong> Mardi et dimanche, atterrissage garanti 12h30, fin max 13h</p>
+                    <p><strong>Replays :</strong> Disponibles après-midi ou lendemain (24h max)</p>
+                    <p><strong>Préfixes Zoom :</strong> BS (Besoin Soutien) / PP (Pas Pratique)</p>
+                </div>
+
+                <h3>💡 Cas Pratiques Réussis</h3>
+                
+                <div class="protocol-step">
+                    <div class="step-number">📞</div>
+                    <strong>Catherine - Suivi Commercial :</strong>
+                    <br>Objectif : Développer suivi client sur 5 mois
+                    <br>Scène-preuve : CRM avec briques bleues (tâches accomplies)
+                    <br>Micro-comportement : Décrocher téléphone sans se poser questions
+                    <br>Résultat : Appel réalisé immédiatement après atelier
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">💪</div>
+                    <strong>Séraphin - Fitness Matinal :</strong>
+                    <br>Objectif : 30 min fitness chaque matin
+                    <br>Ancrage : Chaleur jaune au plexus solaire
+                    <br>Premier pas : Préparer affaires sport la veille
+                    <br>Résultat : Passage à l'action dès le lendemain
+                </div>
+
+                <div class="protocol-step">
+                    <div class="step-number">🏠</div>
+                    <strong>Communication Familiale :</strong>
+                    <br>Contexte : Améliorer accueil enfants 17h30 cuisine
+                    <br>Valeurs : Amour, connexion, sécurité
+                    <br>Micro-comportements : S'accroupir, contact visuel, voix douce
+                    <br>Alliance : Enfant se sent écouté et détendu
+                </div>
+
+                <h3>🎭 Démonstration Communication Mère-Fils</h3>
+                <div class="highlight-box">
+                    <p><strong>Situation :</strong> Améliorer communication téléphonique répétitive</p>
+                    <p><strong>Contexte précis :</strong> Lundi soir, téléphone, salon</p>
+                    <p><strong>Posture optimale :</strong> Debout, mouvement, sourire</p>
+                    <p><strong>Voix :</strong> Plus rapide, plus haute, avec variants</p>
+                    <p><strong>Valeurs :</strong> Confiance, liberté, équilibre</p>
+                    <p><strong>Impact alliance :</strong> Mère ressent bonheur et complicité</p>
+                </div>
+
+                <h3>🔥 Témoignages Participants</h3>
+                <div class="example-box">
+                    <p><strong>Arnaud :</strong> "Le protocole m'a aidé à comprendre pourquoi je procrastinais - l'objectif n'était pas connecté à mes valeurs. En faisant ce lien, l'envie d'agir est apparue quasi immédiatement."</p>
+                    
+                    <p><strong>Véronique (blocage) :</strong> Travail fin d'études - blocage à l'étape micro-comportements. Sensation "barre" physique = signal croyance limitante à explorer.</p>
+                    
+                    <p><strong>Naïma (sophrologie) :</strong> Visualisation professionnelle - posture droite, voix douce, "dans son élément". Valeurs : transmission, bienveillance, ouverture.</p>
+                </div>
+
+                <h3>📊 Statistiques Efficacité</h3>
+                <div class="warning-box">
+                    <p><strong>Mise à jour Zoom :</strong> Résout 98% des problèmes techniques</p>
+                    <p><strong>Questions inadaptées :</strong> 80-90% des blocages = mauvaise question</p>
+                    <p><strong>Premier pas :</strong> Doit être réalisable en moins de 5 minutes</p>
+                    <p><strong>Relation vs processus :</strong> Qualité relationnelle prime toujours</p>
+                </div>
+            </section>
+
+            <section id="conseils-pratiques" class="section">
+                <h2>💡 Conseils Pratiques d'Accompagnement</h2>
+                
+                <h3>🎯 Qualités Accompagnant Efficace</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-title">🤗 Bienveillance</div>
+                        <p>Absence jugement, accueil inconditionnel des réponses, empathie naturelle</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">👂 Écoute Active</div>
+                        <p>Reformulation, utilisation vocabulaire personne, questions pertinentes</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">🎯 Persistance</div>
+                        <p>Ne pas lâcher en cours, continuer questionnement jusqu'émergence réponses</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">📝 Précision</div>
+                        <p>Distinction comportements observables/ressentis, clarification pensée</p>
+                    </div>
+                </div>
+
+                <h3>❓ Questions Types par Étape</h3>
+                <div class="highlight-box">
+                    <p><strong>Étape 1 :</strong> "Visualise une scène preuve que tu as atteint ton objectif"</p>
+                    <p><strong>Étape 2 :</strong> "Qu'est-ce que ça nourrit d'important pour toi ?" (3 niveaux)</p>
+                    <p><strong>Étape 3 :</strong> "Qui va bénéficier de ça ?" "Comment te regarde-t-elle ?"</p>
+                    <p><strong>Étape 4 :</strong> "Comment as-tu fait ?" "Quel premier petit pas ?"</p>
+                    <p><strong>Étape 5 :</strong> "Rentre dans ton corps futur, que ressens-tu ?"</p>
+                </div>
+
+                <h3>🔄 Retour au Présent</h3>
+                <div class="protocol-step">
+                    <div class="step-number">🌍</div>
+                    <strong>Formulation recommandée :</strong> "Je t'invite à vivre tout ce que tu as encore à vivre dans cet instant, à aller jusqu'au bout de l'expérience. Et puis, quand tu seras allé au bout, à revenir tranquillement avec moi ici et maintenant, et à ouvrir les yeux."
+                </div>
+
+                <h3>📝 Feedback Constructif</h3>
+                <div class="example-box">
+                    <p><strong>Structure feedback :</strong> Pointer ce qui a bien fonctionné + ce qui a aidé ou sorti de la dynamique</p>
+                    <p><strong>Exemples concrets :</strong> "Quand tu as reformulé mes mots exacts, ça m'a aidé" / "Quand tu t'es trompé de mot, ça m'a sorti de la dynamique"</p>
+                    <p><strong>Objectif :</strong> Indicateurs précieux pour apprentissage mutuel</p>
+                </div>
+            </section>
+
+            <section id="cas-specifiques" class="section">
+                <h2>🎯 Gestion Cas Spécifiques</h2>
+                
+                <h3>🚨 Systèmes de Protection</h3>
+                <div class="warning-box">
+                    <p><strong>Signaux d'alerte :</strong> Fuite, tétanie, confusion, oubli soudain, évanouissement</p>
+                    <p><strong>Question révélatrice :</strong> "Qu'est-ce que tu risques si tu commences ?"</p>
+                    <p><strong>Interprétation :</strong> Partie protectrice active - peur sous-jacente à explorer</p>
+                    <p><strong>Conduite :</strong> Accueillir comme information, ne pas forcer</p>
+                </div>
+
+                <h3>🎭 Adaptation Profils Spécifiques</h3>
+                <div class="example-box">
+                    <p><strong>Profils "aidants" :</strong> Difficulté identifier besoins personnels → Questions ciblées retour à soi</p>
+                    <p><strong>Kinesthésiques :</strong> Difficulté visualisation → Privilégier sensations, textures, températures</p>
+                    <p><strong>Auditifs :</strong> Remplacer "tu vois" par "tu imagines" ou "tu te représentes"</p>
+                    <p><strong>Orientés solutions :</strong> Tendance donner conseils → Focus sur questions ouvertes</p>
+                </div>
+
+                <h3>⚖️ Éthique et Limites</h3>
+                <div class="warning-box">
+                    <p><strong>Sujets à éviter niveau Base :</strong> Traumatismes lourds, deuils, ruptures</p>
+                    <p><strong>Choix sujets :</strong> Enjeu modéré, peu chargé émotionnellement</p>
+                    <p><strong>Mandat obligatoire :</strong> Problème + besoin + objectif + demande d'aide</p>
+                    <p><strong>Frontières :</strong> Vérifier intention personnelle avant questionner</p>
+                </div>
+            </section>
+
+            <section id="synthese" class="section section-synthese">
+                <h2>📊 Synthèse Visuelle</h2>
+                
+                <div class="key-points">
+                    <h3>🎯 Schéma Global du Protocole</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; margin: 1rem 0;">
+                        <p style="font-size: 1.1rem; margin-bottom: 1rem; text-align: center;">
+                            <strong>CONTEXTE</strong> → <strong>SCÈNE-PREUVE</strong> → <strong>VALEURS</strong> → <strong>ALLIANCES</strong> → <strong>MICRO-COMPORTEMENTS</strong> → <strong>ANCRAGE</strong>
+                        </p>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>📝</div>
+                                <div>Quoi/Quand/Où</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>👁️</div>
+                                <div>Visualisation</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>💎</div>
+                                <div>Motivations</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🤝</div>
+                                <div>Bénéficiaires</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>⚡</div>
+                                <div>Actions</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center; min-width: 120px;">
+                                <div>🎨</div>
+                                <div>Émotion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-points">
+                    <h3>🔄 Processus de Changement</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <strong>PROCRASTINATION</strong> (Objectif déconnecté valeurs)<br>
+                            ↓ Protocole 5 points ↓<br>
+                            <strong>CONNEXION VALEURS</strong> (Moteurs allumés)<br>
+                            ↓<br>
+                            <strong>PREMIER PAS</strong> (Action concrète)<br>
+                            ↓<br>
+                            <strong>DYNAMIQUE LANCÉE</strong> (Objectif actionnable)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="check-final" class="section">
+                <div class="key-points">
+                    <h2>✅ Checklist Maîtrise Niveau Base</h2>
+                    <div class="points-grid">
+                        <div class="point-card">Je comprends le principe projection future</div>
+                        <div class="point-card">Je maîtrise dissociation/association</div>
+                        <div class="point-card">Je guide les 5 étapes dans l'ordre</div>
+                        <div class="point-card">Je questionne 3 niveaux de valeurs</div>
+                        <div class="point-card">Je crée l'alliance efficacement</div>
+                        <div class="point-card">J'identifie micro-comportements pertinents</div>
+                        <div class="point-card">Je réalise ancrage énergétique</div>
+                        <div class="point-card">Je gère les blocages constructivement</div>
+                        <div class="point-card">Je respecte cadre éthique</div>
+                        <div class="point-card">Je donne feedback utile</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="autres-infos" class="section">
+                <h2>📚 Autres Informations</h2>
+                
+                <h3>📍 Position dans Cursus ADVM</h3>
+                <p><strong>Niveau :</strong> Base - Premier protocole motivation accessible débutants</p>
+                <p><strong>Prérequis :</strong> Aucun, protocole robuste même avec erreurs</p>
+                <p><strong>Suites :</strong> Préparation mentale, ancrage, auto-ancrage (Technicien)</p>
+
+                <h3>🔬 Fondements Scientifiques</h3>
+                <div class="highlight-box">
+                    <p><strong>Neuroplasticité :</strong> Visualisation future crée nouvelles connexions</p>
+                    <p><strong>Psychologie cognitive :</strong> Changement perspective temporelle</p>
+                    <p><strong>Motivation intrinsèque :</strong> Connexion objectifs/valeurs personnelles</p>
+                    <p><strong>Théorie de l'engagement :</strong> Premier pas facilite passage à l'action</p>
+                </div>
+
+                <h3>🌍 Applications Diverses</h3>
+                <div class="example-box">
+                    <p><strong>Développement personnel :</strong> Objectifs de vie, habitudes</p>
+                    <p><strong>Professionnel :</strong> Projets, communication, leadership</p>
+                    <p><strong>Familial :</strong> Relations, éducation, communication</p>
+                    <p><strong>Santé :</strong> Activité physique, hygiène de vie</p>
+                    <p><strong>Apprentissage :</strong> Études, formations, compétences</p>
+                </div>
+
+                <h3>📞 Ressources Complémentaires</h3>
+                <div class="warning-box">
+                    <p><strong>Paul Pyronnet Institut :</strong> Formation PNL complète</p>
+                    <p><strong>Cyril Godon :</strong> cyril.godon@zeolitop.com - Ateliers distanciel</p>
+                    <p><strong>Fiches protocoles :</strong> Support débutants avec questions types</p>
+                    <p><strong>Replays ateliers :</strong> Révision et approfondissement</p>
+                </div>
+
+                <h3>🚀 Pour Aller Plus Loin</h3>
+                <div class="highlight-box">
+                    <p><strong>Pratique régulière :</strong> S'entraîner sur objectifs différents</p>
+                    <p><strong>Auto-application :</strong> Utiliser pour ses propres projets</p>
+                    <p><strong>Binômes pratique :</strong> Groupes WhatsApp entre stagiaires</p>
+                    <p><strong>Feedback systématique :</strong> Amélioration continue compétences</p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p><strong>Objectif en 5 Points - Guide Révision Base ADVM 2025</strong></p>
+            <p>Paul Pyronnet Institut | Cyril Godon Ateliers</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                "Un chemin c'est une suite de petits pas et après on est arrivé au bout d'un moment"
+            </p>
+        </footer>
+        
+        <!-- Bannière Alexandre DHENNIN -->
+        <div class="author-banner">
+            <h3>📚 Synthèse & Mise en Forme</h3>
+            <p><strong>Alexandre DHENNIN</strong> - Étudiant ADVM 2025</p>
+            <p>Mise en forme professionnelle & optimisation pédagogique</p>
+            
+            <div class="contact-info">
+                <p><strong>Contact :</strong> advm2025off@gmail.com</p>
+                <p>Autres services de synthèse et mise en forme sur demande</p>
+            </div>
+            
+            <div class="disclaimer">
+                <p><strong>Important :</strong> Document créé hors cadre Paul Pyronnet Institut</p>
+                <p>Synthèse personnelle non validée - Contenus pédagogiques basés sur formations PPI</p>
+                <p>Erreurs possibles - Se référer aux sources officielles pour validation</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
